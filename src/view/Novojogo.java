@@ -766,7 +766,16 @@ public class Novojogo extends javax.swing.JFrame {
     }//GEN-LAST:event_selectDBActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        dispose();
+        if(campoNome.getText().equals("")){
+            Mensagem msg = new Mensagem();
+            msg.mousedrag(msg);
+            try {
+                msg.mensagem("Digite o seu nome para continuar!", Equipe.getCor1((String) selectDB.getSelectedItem(), Integer.parseInt(campoEquipe.getText())));
+            } catch (IOException ex) {
+                Logger.getLogger(Novojogo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            
         Principal p = new Principal();
         String sexo = null;
         if(checkHomem.isSelected()){
@@ -779,8 +788,10 @@ public class Novojogo extends javax.swing.JFrame {
         try {
             p.recebedados(campoNome.getText(), sexo,Integer.parseInt((String) selectDB.getSelectedItem()), Integer.parseInt(campoEquipe.getText()));
             p.mousedrag(p);
+            dispose();
         } catch (IOException ex) {
             Logger.getLogger(Novojogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
 

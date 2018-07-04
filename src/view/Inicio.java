@@ -279,11 +279,15 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        JOptionPane.showMessageDialog(null, "Indisponível!");
+        Mensagem msg = new Mensagem();
+        msg.mensagem("Recurso indisponível!", "#99CCFF");
+        msg.mousedrag(msg);
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        JOptionPane.showMessageDialog(null, "Indisponível!");
+        Mensagem msg = new Mensagem();
+        msg.mensagem("Recurso indisponível!", "#99CCFF");
+        msg.mousedrag(msg);
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jPanel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MousePressed
