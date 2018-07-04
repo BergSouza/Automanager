@@ -15,13 +15,26 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import classes.Equipe;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Bergson
  */
 public class Novojogo extends javax.swing.JFrame {
-
+    private static Point point = new Point();
+    private static JFrame frame = new JFrame();
+    
+    public void mousedrag(JFrame fram){
+        frame = fram;
+    }
+    public void mousedragg(MouseEvent evt){
+        Point p = frame.getLocation();
+        frame.setLocation(p.x + evt.getX() - point.x, p.y + evt.getY() - point.y);
+    }
     /**
      * Creates new form Novojogo
      */
@@ -107,7 +120,37 @@ public class Novojogo extends javax.swing.JFrame {
         }
     }
     
+    public void setacores(int idequipe){
+        try {
+            String cor1 = Equipe.getCor1((String) selectDB.getSelectedItem(), idequipe);
+            String cor2 = Equipe.getCor2((String) selectDB.getSelectedItem(), idequipe);
+            jPanel2.setBackground(Color.decode(cor1));
+            checkHomem.setBackground(Color.decode(cor1));
+            checkMulher.setBackground(Color.decode(cor1));
+            btnCancelar.setForeground(Color.decode(cor1));
+            btnContinuar.setForeground(Color.decode(cor1));
+            txtp1.setForeground(Color.decode(cor1));
+            txtp2.setForeground(Color.decode(cor1));
+            campoNome.setForeground(Color.decode(cor1));
+            cb1.setForeground(Color.decode(cor1));
+            cb2.setForeground(Color.decode(cor1));
+            cb3.setForeground(Color.decode(cor1));
+            cb4.setForeground(Color.decode(cor1));
+            cb5.setForeground(Color.decode(cor1));
+            cb6.setForeground(Color.decode(cor1));
+            cb7.setForeground(Color.decode(cor1));
+            cb8.setForeground(Color.decode(cor1));
+            cb9.setForeground(Color.decode(cor1));
+            cb10.setForeground(Color.decode(cor1));
+            cb11.setForeground(Color.decode(cor1));
+            cb12.setForeground(Color.decode(cor1));
+        } catch (IOException ex) {
+            Logger.getLogger(Novojogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void resetacaixas(int a) throws IOException{
+        setacores(a);
         cb1.setSelected(false);
         cb2.setSelected(false);
         cb3.setSelected(false);
@@ -287,6 +330,7 @@ public class Novojogo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtProprio = new javax.swing.JLabel();
         campoEquipe = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         cb7 = new javax.swing.JCheckBox();
         cb10 = new javax.swing.JCheckBox();
@@ -334,7 +378,32 @@ public class Novojogo extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel3MouseDragged(evt);
+            }
+        });
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel3MousePressed(evt);
+            }
+        });
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel1MouseDragged(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cb7.setBackground(new java.awt.Color(255, 255, 255));
@@ -458,7 +527,7 @@ public class Novojogo extends javax.swing.JFrame {
         jPanel1.add(cb3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, 120, -1));
 
         imgequipe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/novojogo/equipe.png"))); // NOI18N
-        jPanel1.add(imgequipe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 6, -1, -1));
+        jPanel1.add(imgequipe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         imgp1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/novojogo/piloto1.png"))); // NOI18N
         jPanel1.add(imgp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 132, -1, 88));
@@ -507,7 +576,7 @@ public class Novojogo extends javax.swing.JFrame {
         txtMotor.setText(" Motor");
         jPanel1.add(txtMotor, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, -1, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 440, 380));
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 440, 380));
 
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -564,7 +633,9 @@ public class Novojogo extends javax.swing.JFrame {
         });
         jPanel2.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 327, 105, 41));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 379));
+        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 380));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -707,10 +778,29 @@ public class Novojogo extends javax.swing.JFrame {
         p.setLocationRelativeTo(null);
         try {
             p.recebedados(campoNome.getText(), sexo,Integer.parseInt((String) selectDB.getSelectedItem()), Integer.parseInt(campoEquipe.getText()));
+            p.mousedrag(p);
         } catch (IOException ex) {
             Logger.getLogger(Novojogo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        point.x = evt.getX();
+        point.y = evt.getY();
+    }//GEN-LAST:event_jPanel1MousePressed
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+        mousedragg(evt);
+    }//GEN-LAST:event_jPanel1MouseDragged
+
+    private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
+        point.x = evt.getX();
+        point.y = evt.getY();        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel3MousePressed
+
+    private void jPanel3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseDragged
+        mousedragg(evt);
+    }//GEN-LAST:event_jPanel3MouseDragged
 
     /**
      * @param args the command line arguments
@@ -779,6 +869,7 @@ public class Novojogo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JComboBox<String> selectDB;
     private javax.swing.JLabel txtCaixa;
     private javax.swing.JLabel txtCarro;

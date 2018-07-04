@@ -137,6 +137,16 @@ public class Equipe {
                 return null;
             }
     }
+    public static String getCor1(String db, int idequipe) throws IOException{
+        String d = "#"+baseP(db, idequipe, 14);
+        if(d.equals("#ffffff") || d.equals("#eeeeee") || d.equals("#dddddd")){
+            d = getCor2(db, idequipe);
+            }
+        return d;
+    }  public static String getCor2(String db, int idequipe) throws IOException{
+        String d = "#"+baseP(db, idequipe, 15);
+        return d;
+    }
      
     
 }

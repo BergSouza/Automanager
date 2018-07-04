@@ -8,24 +8,42 @@ import automanager.Automanager;
 import classes.Equipe;
 import classes.Corrida;
 import classes.Motor;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 /**
  *
  * @author Bergson
  */
 public class Principal extends javax.swing.JFrame {
-
+    private static Point point = new Point();
+    private static JFrame frame = new JFrame();
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
     }
-    
+    public void mousedrag(JFrame fram){
+        frame = fram;
+    }
+    public void mousedragg(MouseEvent evt){
+        Point p = frame.getLocation();
+        frame.setLocation(p.x + evt.getX() - point.x, p.y + evt.getY() - point.y);
+    }
+        
     public void recebedados(String nome,String sexo,int db,int idequipe) throws IOException{
         String dbb = Integer.toString(db);
+        
+        this.db.setText(Integer.toString(db));
+        this.idequipe.setText(Integer.toString(idequipe));
+        
         txtChefe.setText(nome);
         imgEquipe.setIcon(Equipe.getImagem(dbb, idequipe));
         imgPiloto1.setIcon(Equipe.getImagemP1(dbb, idequipe));
@@ -70,6 +88,35 @@ public class Principal extends javax.swing.JFrame {
         }
         int ano = Integer.parseInt(anoo);
         txtData.setText(diastring+" / "+messtring+" / "+ano);
+        
+        setacores(dbb, idequipe);
+    }
+    
+    public void setacores(String db, int idequipe){
+        try {
+            String cor1 = Equipe.getCor1(db, idequipe);
+            String cor2 = Equipe.getCor2(db, idequipe);
+            
+            txtData.setBackground(Color.decode(cor2));
+            jLabel2.setForeground(Color.decode(cor1));
+            txtP1.setForeground(Color.decode(cor1));
+            txtP2.setForeground(Color.decode(cor1));
+            jLabel4.setForeground(Color.decode(cor1));
+            txtPa1.setForeground(Color.decode(cor1));
+            txtPa2.setForeground(Color.decode(cor1));
+            txtPa3.setForeground(Color.decode(cor1));
+            jLabel1.setForeground(Color.decode(cor1));
+            txtMotor.setForeground(Color.decode(cor1));
+            txtGP.setForeground(Color.decode(cor1));
+            txtGPinfo.setForeground(Color.decode(cor1));
+            btnCorrida.setBackground(Color.decode(cor1));
+            //btnCorrida.setForeground(Color.decode(cor2));
+            
+            jButton2.setBackground(Color.decode(cor1));
+            jPanel2.setBackground(Color.decode(cor1));
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,6 +128,8 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         proximacorrida = new javax.swing.JTextField();
+        db = new javax.swing.JTextField();
+        idequipe = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnCorrida = new javax.swing.JButton();
@@ -110,6 +159,10 @@ public class Principal extends javax.swing.JFrame {
 
         proximacorrida.setText("jTextField1");
 
+        db.setText("jTextField1");
+
+        idequipe.setText("jTextField1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(2, 0, 0, 0));
         setUndecorated(true);
@@ -119,6 +172,16 @@ public class Principal extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel1MouseDragged(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCorrida.setBackground(new java.awt.Color(102, 102, 102));
@@ -144,7 +207,7 @@ public class Principal extends javax.swing.JFrame {
         txtChefe.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtChefe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/novojogo/chefe2.png"))); // NOI18N
         txtChefe.setText("Chefe");
-        jPanel1.add(txtChefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 218, 29));
+        jPanel1.add(txtChefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 218, 29));
 
         txtP1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -180,12 +243,12 @@ public class Principal extends javax.swing.JFrame {
         txtCaixa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/novojogo/caixa2.png"))); // NOI18N
         txtCaixa.setText("R$ XXXX");
-        jPanel1.add(txtCaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, -1));
+        jPanel1.add(txtCaixa, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
 
         txtData.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtData.setText("00 / 00 / 0000");
-        jPanel1.add(txtData, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 130, 40));
+        jPanel1.add(txtData, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 130, 30));
 
         jButton2.setBackground(new java.awt.Color(102, 102, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -248,12 +311,27 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCorridaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorridaActionPerformed
-        
+        FimDeSemana fds = new FimDeSemana();
+        fds.setVisible(true);
+        fds.setLocationRelativeTo(null);
+        setVisible(false);
+        fds.frame(frame);
+        fds.mousedrag(fds);
+        fds.pegadados(db.getText(),Integer.parseInt(idequipe.getText()),proximacorrida.getText());
     }//GEN-LAST:event_btnCorridaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        point.x = evt.getX();
+        point.y = evt.getY();
+    }//GEN-LAST:event_jPanel1MousePressed
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+        mousedragg(evt);
+    }//GEN-LAST:event_jPanel1MouseDragged
 
     /**
      * @param args the command line arguments
@@ -291,7 +369,9 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCorrida;
+    public javax.swing.JButton btnCorrida;
+    private javax.swing.JTextField db;
+    private javax.swing.JTextField idequipe;
     private javax.swing.JLabel imgEquipe;
     private javax.swing.JLabel imgPa1;
     private javax.swing.JLabel imgPa2;

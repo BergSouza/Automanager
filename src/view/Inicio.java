@@ -5,9 +5,12 @@
  */
 package view;
 
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +18,16 @@ import javax.swing.JOptionPane;
  * @author Bergson
  */
 public class Inicio extends javax.swing.JFrame {
-
+    private static Point point = new Point();
+    private static JFrame frame = new JFrame();
+    
+    public void mousedrag(JFrame fram){
+        frame = fram;
+    }
+    public void mousedragg(MouseEvent evt){
+        Point p = frame.getLocation();
+        frame.setLocation(p.x + evt.getX() - point.x, p.y + evt.getY() - point.y);
+    }
     /**
      * Creates new form Inicio
      */
@@ -33,6 +45,8 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtVersao = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -45,12 +59,28 @@ public class Inicio extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        txtVersao = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
+
+        txtVersao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtVersao.setForeground(new java.awt.Color(255, 255, 255));
+        txtVersao.setText("0.0.0");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel8MouseDragged(evt);
+            }
+        });
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel8MousePressed(evt);
+            }
+        });
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -95,7 +125,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 290));
+        jPanel8.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, -1));
 
         jPanel3.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -122,7 +152,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(0, 3, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 190, 290));
+        jPanel8.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, -1, -1));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -149,7 +179,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 190, 150));
+        jPanel8.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, -1, -1));
 
         jPanel5.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -175,7 +205,7 @@ public class Inicio extends javax.swing.JFrame {
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, 190, 140));
+        jPanel8.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 150, -1, 140));
 
         jPanel2.setBackground(new java.awt.Color(118, 166, 255));
         jPanel2.setForeground(new java.awt.Color(221, 221, 221));
@@ -191,30 +221,23 @@ public class Inicio extends javax.swing.JFrame {
             .addGap(0, 20, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 190, 20));
+        jPanel8.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(221, 221, 221));
         jPanel6.setForeground(new java.awt.Color(221, 221, 221));
-
-        txtVersao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtVersao.setForeground(new java.awt.Color(255, 255, 255));
-        txtVersao.setText("0.0.0");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+            .addGap(0, 250, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtVersao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+            .addGap(0, 20, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 250, 20));
+        jPanel8.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, -1, -1));
 
         jPanel7.setBackground(new java.awt.Color(102, 102, 102));
         jPanel7.setForeground(new java.awt.Color(221, 221, 221));
@@ -230,7 +253,9 @@ public class Inicio extends javax.swing.JFrame {
             .addGap(0, 20, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 290, 190, -1));
+        jPanel8.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 290, -1, -1));
+
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -245,6 +270,7 @@ public class Inicio extends javax.swing.JFrame {
             nj = new Novojogo();
             nj.setVisible(true);
         nj.setLocationRelativeTo(null);
+        nj.mousedrag(nj);
         } catch (IOException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -259,6 +285,15 @@ public class Inicio extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         JOptionPane.showMessageDialog(null, "Indisponível!");
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jPanel8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MousePressed
+        point.x = evt.getX();
+        point.y = evt.getY();
+    }//GEN-LAST:event_jPanel8MousePressed
+
+    private void jPanel8MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseDragged
+        mousedragg(evt);
+    }//GEN-LAST:event_jPanel8MouseDragged
 
     /**
      * @param args the command line arguments
@@ -309,6 +344,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JLabel txtVersao;
     // End of variables declaration//GEN-END:variables
 }

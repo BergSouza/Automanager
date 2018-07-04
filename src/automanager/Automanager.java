@@ -11,7 +11,8 @@ import view.Inicio;
  * @author Bergson
  */
 public class Automanager {
-
+    
+    
     public static String getVersao(){
         String versao = "Pre-Alpha 0.0.1"; 
         return versao;
@@ -22,6 +23,7 @@ public class Automanager {
         Inicio inicio = new Inicio();
         inicio.setVisible(true);
         inicio.setLocationRelativeTo(null);
+        inicio.mousedrag(inicio);
     }
     
 }
