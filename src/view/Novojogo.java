@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import classes.Equipe;
+import classes.Piloto;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -27,6 +28,7 @@ import javax.swing.JFrame;
 public class Novojogo extends javax.swing.JFrame {
     private static Point point = new Point();
     private static JFrame frame = new JFrame();
+    private static String savee = "db";
     
     public void mousedrag(JFrame fram){
         frame = fram;
@@ -45,18 +47,20 @@ public class Novojogo extends javax.swing.JFrame {
     }
     
     public void atualiza(String db, int a) throws IOException{
-        imgequipe.setIcon(Equipe.getImagem(db, a));
-        int b = 1;
-        while(b < 1000){
-            txtp1.setText(Equipe.getP1(db, a, 9));
-            txtp2.setText(Equipe.getP2(db, a, 10));
-            imgp1.setIcon(Equipe.getImagemP1(db, a));
-            imgp2.setIcon(Equipe.getImagemP2(db, a));
+        imgequipe.setIcon(Equipe.getImagem(db, a, savee));
+            campoEquipe.setText(Integer.toString(a));
+            int idequipe = Integer.parseInt(campoEquipe.getText());
+            int idp1 = Equipe.getIdP1(db, idequipe, savee);
+            int idp2 = Equipe.getIdP2(db, idequipe, savee);
+            txtp1.setText(Piloto.getLetraNome(db, idp1, savee)+Piloto.getSobrenome(db, idp1, savee));
+            txtp2.setText(Piloto.getLetraNome(db, idp2, savee)+Piloto.getSobrenome(db, idp2, savee));
+            imgp1.setIcon(Piloto.getImagem(db , idp1, savee));
+            imgp2.setIcon(Piloto.getImagem(db , idp2, savee));
             
             //Pega Dados do Carro
             
             try {
-                FileReader fr = new FileReader("c:/automanager/db/"+db+"/carros/"+a+".amc");
+                FileReader fr = new FileReader("c:/automanager/"+savee+"/"+db+"/carros/"+a+".amc");
                 BufferedReader br = new BufferedReader(fr);
                 int total = 0;
                 txtCarro.setText(" "+br.readLine());
@@ -88,11 +92,11 @@ public class Novojogo extends javax.swing.JFrame {
             }
             //Pega Dados da Equipe
             try {
-                FileReader fr = new FileReader("c:/automanager/db/"+db+"/equipes/"+a+".amt");
+                FileReader fr = new FileReader("c:/automanager/"+savee+"/"+db+"/equipes/"+a+".amt");
                 BufferedReader br = new BufferedReader(fr);
                 br.readLine();
                 String idmotor = br.readLine();
-                FileReader fr2 = new FileReader("c:/automanager/db/"+db+"/motores/"+idmotor+".amm");
+                FileReader fr2 = new FileReader("c:/automanager/"+savee+"/"+db+"/motores/"+idmotor+".amm");
                 BufferedReader br2 = new BufferedReader(fr2);
                 int total = 0;
                 txtMotor.setText(" "+br2.readLine()+" ( "+br.readLine()+" )");
@@ -116,14 +120,12 @@ public class Novojogo extends javax.swing.JFrame {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Novojogo.class.getName()).log(Level.SEVERE, null, ex);
             }
-            b = 1000;
-        }
     }
     
     public void setacores(int idequipe){
         try {
-            String cor1 = Equipe.getCor1((String) selectDB.getSelectedItem(), idequipe);
-            String cor2 = Equipe.getCor2((String) selectDB.getSelectedItem(), idequipe);
+            String cor1 = Equipe.getCor1((String) selectDB.getSelectedItem(), idequipe, savee);
+            String cor2 = Equipe.getCor2((String) selectDB.getSelectedItem(), idequipe, savee);
             jPanel2.setBackground(Color.decode(cor1));
             checkHomem.setBackground(Color.decode(cor1));
             checkMulher.setBackground(Color.decode(cor1));
@@ -230,7 +232,7 @@ public class Novojogo extends javax.swing.JFrame {
     
     public void pegadb(int aa) throws IOException{
         if(aa == 1){
-        FileReader fr1 = new FileReader("C:/automanager/db/dbs.amdb");
+        FileReader fr1 = new FileReader("C:/automanager/"+savee+"/dbs.amdb");
         BufferedReader br1 = new BufferedReader(fr1);
         for (String linha = br1.readLine(); linha != null; linha = br1.readLine()) {
             selectDB.addItem(linha);
@@ -240,7 +242,7 @@ public class Novojogo extends javax.swing.JFrame {
         while(a < 13){
                 FileReader fr;
             try {
-                fr = new FileReader("C:/automanager/db/"+(String) selectDB.getSelectedItem()+"/equipes/"+a+".amt");
+                fr = new FileReader("C:/automanager/"+savee+"/"+(String) selectDB.getSelectedItem()+"/equipes/"+a+".amt");
                 BufferedReader br = new BufferedReader(fr);
                 String nomeequipe = br.readLine();
                 String motor = br.readLine();
@@ -372,7 +374,7 @@ public class Novojogo extends javax.swing.JFrame {
         txtProprio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/novojogo/motor3.png"))); // NOI18N
         txtProprio.setText(" Fornecedor/Cliente");
 
-        campoEquipe.setText("jTextField1");
+        campoEquipe.setText("1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -770,7 +772,7 @@ public class Novojogo extends javax.swing.JFrame {
             Mensagem msg = new Mensagem();
             msg.mousedrag(msg);
             try {
-                msg.mensagem("Digite o seu nome para continuar!", Equipe.getCor1((String) selectDB.getSelectedItem(), Integer.parseInt(campoEquipe.getText())));
+                msg.mensagem("Digite o seu nome para continuar!", Equipe.getCor1((String) selectDB.getSelectedItem(), Integer.parseInt(campoEquipe.getText()), "db"));
             } catch (IOException ex) {
                 Logger.getLogger(Novojogo.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -786,7 +788,7 @@ public class Novojogo extends javax.swing.JFrame {
         p.setVisible(true);
         p.setLocationRelativeTo(null);
         try {
-            p.recebedados(campoNome.getText(), sexo,Integer.parseInt((String) selectDB.getSelectedItem()), Integer.parseInt(campoEquipe.getText()));
+            p.recebedados(campoNome.getText(), sexo,(String) selectDB.getSelectedItem(), Integer.parseInt(campoEquipe.getText()),"db");
             p.mousedrag(p);
             dispose();
         } catch (IOException ex) {

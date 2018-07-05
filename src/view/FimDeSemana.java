@@ -7,6 +7,8 @@ package view;
 
 import classes.Corrida;
 import classes.Equipe;
+import classes.Piloto;
+import classes.Pneu;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -22,6 +24,7 @@ import javax.swing.JFrame;
 public class FimDeSemana extends javax.swing.JFrame {
     private static Point point = new Point();
     private static JFrame frame = new JFrame();
+    private static String savee = null;
     
     JFrame f = new JFrame();
     public void frame(JFrame frame){
@@ -34,17 +37,62 @@ public class FimDeSemana extends javax.swing.JFrame {
         Point p = frame.getLocation();
         frame.setLocation(p.x + evt.getX() - point.x, p.y + evt.getY() - point.y);
     }
-    public void pegadados(String db,int idequipe,String idcorrida){
+    public void pegadados(String db,int idequipe,String idcorrida,String save) throws IOException{
+        savee = save;
         setacores(db,idequipe);
-        txtBandeira.setIcon(Corrida.getBandeira(db, idcorrida));
-    }
+        String p1sobrenome = Piloto.getSobrenome(db, Equipe.getIdP1(db, idequipe, savee),savee);
+        String p2sobrenome = Piloto.getSobrenome(db, Equipe.getIdP2(db, idequipe, savee),savee);
+        String pais = Corrida.getPais(db, idcorrida,savee);
+        String pista = Corrida.getPista(db, idcorrida,savee);
+        String voltas = Corrida.getVoltas(db, idcorrida,savee);
+        String distancia = Corrida.getDistancia(db, idcorrida,savee);
+        txtBandeira.setIcon(Corrida.getBandeira(db, idcorrida,savee));
+        jLabel1.setText("FIM DE SEMANA GP "+pais.toUpperCase()+" - "+pista.toUpperCase()+" - "+voltas+" VOLTAS");
+        txtLocal.setText("Local: "+pista);
+        txtDistancia.setText("Distancia: "+distancia);
+        txtpneusp1.setText("SELEÇÃO DE PNEUS - "+p1sobrenome.toUpperCase());
+        txtpneusp2.setText("SELEÇÃO DE PNEUS - "+p2sobrenome.toUpperCase());
+        setapneus(db, idequipe, idcorrida);
+   }
+    
+   public void setapneus(String db, int idequipe, String idcorrida){
+       int idpneu1 = Integer.parseInt(Corrida.getPneu1(db, idcorrida,savee));
+       int idpneu2 = Integer.parseInt(Corrida.getPneu2(db, idcorrida,savee));
+       int idpneu3 = Integer.parseInt(Corrida.getPneu3(db, idcorrida,savee));
+        try {
+            pneu11.setIcon(Pneu.getImagem(db, idpneu1));
+            pneu12.setIcon(Pneu.getImagem(db, idpneu1));
+            pneu21.setIcon(Pneu.getImagem(db, idpneu2));
+            pneu22.setIcon(Pneu.getImagem(db, idpneu2));
+            pneu31.setIcon(Pneu.getImagem(db, idpneu3));
+            pneu32.setIcon(Pneu.getImagem(db, idpneu3));
+            txtpneu11.setText(Pneu.getNome(db, idpneu1));
+            txtpneu21.setText(Pneu.getNome(db, idpneu2));
+            txtpneu31.setText(Pneu.getNome(db, idpneu3));
+            txtpneu12.setText(Pneu.getNome(db, idpneu1));
+            txtpneu22.setText(Pneu.getNome(db, idpneu2));
+            txtpneu32.setText(Pneu.getNome(db, idpneu3));
+        } catch (IOException ex) {
+            Logger.getLogger(FimDeSemana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   }
     
     public void setacores(String db, int idequipe){
         try {
-            String cor1 = Equipe.getCor1(db, idequipe);
-            String cor2 = Equipe.getCor2(db, idequipe);
+            String cor1 = Equipe.getCor1(db, idequipe, savee);
+            String cor2 = Equipe.getCor2(db, idequipe, savee);
             jPanel2.setBackground(Color.decode(cor1));
             jButton1.setBackground(Color.decode(cor1));
+            txtLocal.setForeground(Color.decode(cor1));
+            txtDistancia.setForeground(Color.decode(cor1));
+            txtpneusp1.setForeground(Color.decode(cor1));
+            txtpneusp2.setForeground(Color.decode(cor1));
+            txtpneu11.setForeground(Color.decode(cor1));
+            txtpneu21.setForeground(Color.decode(cor1));
+            txtpneu31.setForeground(Color.decode(cor1));
+            txtpneu12.setForeground(Color.decode(cor1));
+            txtpneu22.setForeground(Color.decode(cor1));
+            txtpneu32.setForeground(Color.decode(cor1));
         } catch (IOException ex) {
             Logger.getLogger(FimDeSemana.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -68,6 +116,22 @@ public class FimDeSemana extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtBandeira = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        txtLocal = new javax.swing.JLabel();
+        txtDistancia = new javax.swing.JLabel();
+        txtpneusp2 = new javax.swing.JLabel();
+        pneu12 = new javax.swing.JLabel();
+        pneu22 = new javax.swing.JLabel();
+        pneu32 = new javax.swing.JLabel();
+        txtpneusp1 = new javax.swing.JLabel();
+        pneu11 = new javax.swing.JLabel();
+        pneu21 = new javax.swing.JLabel();
+        pneu31 = new javax.swing.JLabel();
+        txtpneu11 = new javax.swing.JLabel();
+        txtpneu21 = new javax.swing.JLabel();
+        txtpneu31 = new javax.swing.JLabel();
+        txtpneu12 = new javax.swing.JLabel();
+        txtpneu22 = new javax.swing.JLabel();
+        txtpneu32 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -99,7 +163,7 @@ public class FimDeSemana extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -107,7 +171,7 @@ public class FimDeSemana extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 490, 50));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 550, 50));
 
         txtBandeira.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/bcorrida.png"))); // NOI18N
         jPanel1.add(txtBandeira, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
@@ -121,17 +185,77 @@ public class FimDeSemana extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 293, 110, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 110, 40));
+
+        txtLocal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtLocal.setText("Local: Albert Park");
+        jPanel1.add(txtLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 410, 30));
+
+        txtDistancia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtDistancia.setText("Distância: xxx km");
+        jPanel1.add(txtDistancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 410, 30));
+
+        txtpneusp2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtpneusp2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtpneusp2.setText("SELEÇÃO DE PNEUS - PILOTO 2");
+        jPanel1.add(txtpneusp2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 260, 30));
+
+        pneu12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/pneu.png"))); // NOI18N
+        jPanel1.add(pneu12, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
+
+        pneu22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/pneu.png"))); // NOI18N
+        jPanel1.add(pneu22, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, -1, -1));
+
+        pneu32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/pneu.png"))); // NOI18N
+        jPanel1.add(pneu32, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
+
+        txtpneusp1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtpneusp1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtpneusp1.setText("SELEÇÃO DE PNEUS - PILOTO 1");
+        jPanel1.add(txtpneusp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 260, 30));
+
+        pneu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/pneu.png"))); // NOI18N
+        jPanel1.add(pneu11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+
+        pneu21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/pneu.png"))); // NOI18N
+        jPanel1.add(pneu21, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
+
+        pneu31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/pneu.png"))); // NOI18N
+        jPanel1.add(pneu31, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, -1, -1));
+
+        txtpneu11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtpneu11.setText("Ultra Soft");
+        jPanel1.add(txtpneu11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 80, -1));
+
+        txtpneu21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtpneu21.setText("Ultra Soft");
+        jPanel1.add(txtpneu21, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 80, -1));
+
+        txtpneu31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtpneu31.setText("Ultra Soft");
+        jPanel1.add(txtpneu31, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 80, -1));
+
+        txtpneu12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtpneu12.setText("Ultra Soft");
+        jPanel1.add(txtpneu12, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 80, -1));
+
+        txtpneu22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtpneu22.setText("Ultra Soft");
+        jPanel1.add(txtpneu22, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 80, -1));
+
+        txtpneu32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtpneu32.setText("Ultra Soft");
+        jPanel1.add(txtpneu32, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 80, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
         );
 
         pack();
@@ -191,6 +315,22 @@ public class FimDeSemana extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel pneu11;
+    private javax.swing.JLabel pneu12;
+    private javax.swing.JLabel pneu21;
+    private javax.swing.JLabel pneu22;
+    private javax.swing.JLabel pneu31;
+    private javax.swing.JLabel pneu32;
     private javax.swing.JLabel txtBandeira;
+    private javax.swing.JLabel txtDistancia;
+    private javax.swing.JLabel txtLocal;
+    private javax.swing.JLabel txtpneu11;
+    private javax.swing.JLabel txtpneu12;
+    private javax.swing.JLabel txtpneu21;
+    private javax.swing.JLabel txtpneu22;
+    private javax.swing.JLabel txtpneu31;
+    private javax.swing.JLabel txtpneu32;
+    private javax.swing.JLabel txtpneusp1;
+    private javax.swing.JLabel txtpneusp2;
     // End of variables declaration//GEN-END:variables
 }

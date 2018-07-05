@@ -18,9 +18,9 @@ import javax.swing.ImageIcon;
  * @author Bergson
  */
 public class Motor {
-    public static String baseM(String db,int idmotor, int linha) throws IOException{
+    public static String baseM(String db,int idmotor, int linha, String sav) throws IOException{
         try {
-            FileReader fr = new FileReader("C:/automanager/db/"+db+"/motores/"+idmotor+".amm");
+            FileReader fr = new FileReader("C:/automanager/"+sav+"/"+db+"/motores/"+idmotor+".amm");
             BufferedReader br = new BufferedReader(fr);
             for (int i = 0; i < linha-1; i++) {
                 br.readLine();
@@ -33,9 +33,9 @@ public class Motor {
         }
         
     }
-    public static String getId(String db,int idequipe) throws IOException{
+    public static String getId(String db,int idequipe,  String sav) throws IOException{
         try {
-            String lida = Equipe.baseP(db, idequipe, 2);
+            String lida = Equipe.baseP(db, idequipe, 2, sav);
             return lida;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Motor.class.getName()).log(Level.SEVERE, null, ex);
@@ -43,10 +43,10 @@ public class Motor {
         }
         
     }
-    public static ImageIcon getImagemMotor(String db, int idequipe){
+    public static ImageIcon getImagemMotor(String db, int idequipe, String sav){
         try {
-            int idmotor = Integer.parseInt(getId(db, idequipe));
-            ImageIcon icon = new ImageIcon("C:/automanager/db/"+db+"/motores/"+idmotor+".png");
+            int idmotor = Integer.parseInt(getId(db, idequipe, sav));
+            ImageIcon icon = new ImageIcon("C:/automanager/"+sav+"/"+db+"/motores/"+idmotor+".png");
             return icon;
         } catch (IOException ex) {
             Logger.getLogger(Motor.class.getName()).log(Level.SEVERE, null, ex);

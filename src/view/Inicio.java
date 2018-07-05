@@ -45,7 +45,6 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtVersao = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -59,11 +58,8 @@ public class Inicio extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        txtVersao = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-
-        txtVersao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtVersao.setForeground(new java.awt.Color(255, 255, 255));
-        txtVersao.setText("0.0.0");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -218,23 +214,31 @@ public class Inicio extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        jPanel8.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, -1));
+        jPanel8.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, 30));
 
         jPanel6.setBackground(new java.awt.Color(221, 221, 221));
         jPanel6.setForeground(new java.awt.Color(221, 221, 221));
+
+        txtVersao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtVersao.setForeground(new java.awt.Color(255, 255, 255));
+        txtVersao.setText("0.0.0");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtVersao, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(txtVersao, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel8.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, -1, -1));
@@ -250,12 +254,12 @@ public class Inicio extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGap(0, 30, Short.MAX_VALUE)
         );
 
-        jPanel8.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 290, -1, -1));
+        jPanel8.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 290, -1, 30));
 
-        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, -1));
+        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 320));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -279,9 +283,18 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        Mensagem msg = new Mensagem();
+        /*Mensagem msg = new Mensagem();
         msg.mensagem("Recurso indisponível!", "#99CCFF");
-        msg.mousedrag(msg);
+        msg.mousedrag(msg);*/
+        CarregarJogo cj;
+        try {
+            cj = new CarregarJogo();
+            //cj.setVisible(true);
+            //cj.setLocationRelativeTo(null);
+        } catch (IOException ex) {
+            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked

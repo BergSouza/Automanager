@@ -8,10 +8,13 @@ import automanager.Automanager;
 import classes.Equipe;
 import classes.Corrida;
 import classes.Motor;
+import classes.Patrocinio;
+import classes.Piloto;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -24,12 +27,42 @@ import javax.swing.JFrame;
 public class Principal extends javax.swing.JFrame {
     private static Point point = new Point();
     private static JFrame frame = new JFrame();
+    private static String cor = null;
+    private static String dbb = null;
+    private static String nomee = null;
+    private static String sexoo = null;
+    private static String idequipee = null;
+    private static String savee = null;
     /**
      * Creates new form Principal
      */
     public Principal() {
         initComponents();
     }
+    
+    public void temp(String db){
+        File origem = new File("C:/automanager/"+savee+"/"+db);
+        File destino = new File("C:/automanager/"+savee+"/temp");
+        this.db.setText("temp");
+        dbb = "temp";
+        try {
+            Automanager.copyAll(origem, destino, true);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedOperationException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public static void excluirtemp(File arq){
+        if(arq.isDirectory()){
+            File[] arquivos = arq.listFiles();
+            for(int i=0;i<arquivos.length;i++){
+               excluirtemp(arquivos[0]);
+            }
+         }
+        arq.delete();
+    }
+    
     public void mousedrag(JFrame fram){
         frame = fram;
     }
@@ -38,39 +71,47 @@ public class Principal extends javax.swing.JFrame {
         frame.setLocation(p.x + evt.getX() - point.x, p.y + evt.getY() - point.y);
     }
         
-    public void recebedados(String nome,String sexo,int db,int idequipe) throws IOException{
-        String dbb = Integer.toString(db);
-        
-        this.db.setText(Integer.toString(db));
+    public void recebedados(String nome,String sexo,String db,int idequipe, String save) throws IOException{
+        String dbb = db;
+        nomee = nome;
+        sexoo = sexo;
+        idequipee = Integer.toString(idequipe);
+        dbb = db;
         this.idequipe.setText(Integer.toString(idequipe));
-        
+        savee = save;
         txtChefe.setText(nome);
-        imgEquipe.setIcon(Equipe.getImagem(dbb, idequipe));
-        imgPiloto1.setIcon(Equipe.getImagemP1(dbb, idequipe));
-        txtP1.setText(Equipe.getP1(dbb, idequipe, 9));
-        imgPiloto2.setIcon(Equipe.getImagemP2(dbb, idequipe));
-        txtP2.setText(Equipe.getP2(dbb, idequipe, 10));
-        imgPa1.setIcon(Equipe.getImagemPA1(dbb, idequipe));
-        imgPa2.setIcon(Equipe.getImagemPA2(dbb, idequipe));
-        imgPa3.setIcon(Equipe.getImagemPA3(dbb, idequipe));
-        txtPa1.setText(Equipe.getPA1(dbb, idequipe, 1));
-        txtPa2.setText(Equipe.getPA2(dbb, idequipe, 1));
-        txtPa3.setText(Equipe.getPA3(dbb, idequipe, 1));
-        txtCaixa.setText("R$: "+Equipe.baseP(dbb, idequipe, 6));
+        imgEquipe.setIcon(Equipe.getImagem(dbb, idequipe, savee));
+        int idp1 = Equipe.getIdP1(dbb, idequipe, savee);
+        int idp2 = Equipe.getIdP2 (dbb, idequipe, savee);
+        int idpa1 = Equipe.getIdPA1(dbb, idequipe, savee);
+        int idpa2 = Equipe.getIdPA2(dbb, idequipe, savee);
+        int idpa3 = Equipe.getIdPA3(dbb, idequipe, savee);
+        imgPiloto1.setIcon(Piloto.getImagem(dbb, idp1,savee));
+        txtP1.setText(Piloto.getLetraNome(dbb, idp1,savee)+Piloto.getSobrenome(dbb, idp1,savee));
+        imgPiloto2.setIcon(Piloto.getImagem(dbb, idp2,savee));
+        txtP2.setText(Piloto.getLetraNome(dbb, idp2,savee)+Piloto.getSobrenome(dbb, idp2,savee));
+        imgPa1.setIcon(Patrocinio.getImagem(dbb, idpa1,savee));
+        imgPa2.setIcon(Patrocinio.getImagem(dbb, idpa2,savee));
+        imgPa3.setIcon(Patrocinio.getImagem(dbb, idpa3,savee));
+        txtPa1.setText(Patrocinio.getNome(dbb, idpa1,savee));
+        txtPa2.setText(Patrocinio.getNome(dbb, idpa2,savee));
+        txtPa3.setText(Patrocinio.getNome(dbb, idpa3,savee));
+        txtCaixa.setText(Equipe.getCaixa(dbb, idequipe, savee));
         
         int proxcorrida = 1;
         String proxicorrida = Integer.toString(proxcorrida);
         proximacorrida.setText(proxicorrida);
-        txtGP.setText("Próxima Corrida: GP "+Corrida.baseP(dbb, proxicorrida, 1)+" - "+Corrida.baseP(dbb, proxicorrida, 2));
-        txtGPinfo.setText(proxicorrida+"/"+Corrida.getTotalCorridas(dbb)+" - "+Corrida.baseP(dbb, proxicorrida, 3)+" Voltas");
-        btnCorrida.setText("Viajar a "+Corrida.baseP(dbb, proxicorrida, 2));
-        txtBandeira.setIcon(Corrida.getBandeira(dbb, proxicorrida));
+        txtGP.setText("Próxima Corrida: GP "+Corrida.baseP(dbb, proxicorrida, 1, savee)+" - "+Corrida.baseP(dbb, proxicorrida, 2,savee));
+        txtGPinfo.setText(proxicorrida+"/"+Corrida.getTotalCorridas(dbb,savee)+" - "+Corrida.baseP(dbb, proxicorrida, 3,savee)+" Voltas");
+        btnCorrida.setText("Viajar a "+Corrida.baseP(dbb, proxicorrida, 2,savee));
+        txtBandeira.setIcon(Corrida.getBandeira(dbb, proxicorrida,savee));
         
-        String idmotor = Motor.getId(dbb, idequipe);
-        txtMotor.setText(Motor.baseM(dbb, Integer.parseInt(idmotor), 1));
-        txtImagemMotor.setIcon(Motor.getImagemMotor(dbb, idequipe));
+        String idmotor = Motor.getId(dbb, idequipe, savee);
+        txtMotor.setText(Motor.baseM(dbb, Integer.parseInt(idmotor), 1, savee));
+        txtImagemMotor.setIcon(Motor.getImagemMotor(dbb, idequipe, savee));
         
-        FileReader fr = new FileReader("C:/automanager/db/"+dbb+"/dbinfo.amdi");
+        FileReader fr;
+        fr = new FileReader("C:/automanager/"+savee+"/"+dbb+"/dbinfo.amdi");
         BufferedReader br = new BufferedReader(fr);
         String anoo = br.readLine();
         
@@ -90,12 +131,14 @@ public class Principal extends javax.swing.JFrame {
         txtData.setText(diastring+" / "+messtring+" / "+ano);
         
         setacores(dbb, idequipe);
+        temp(dbb);
     }
     
     public void setacores(String db, int idequipe){
         try {
-            String cor1 = Equipe.getCor1(db, idequipe);
-            String cor2 = Equipe.getCor2(db, idequipe);
+            String cor1 = Equipe.getCor1(db, idequipe, savee);
+            cor = cor1;
+            String cor2 = Equipe.getCor2(db, idequipe, savee);
             
             txtData.setBackground(Color.decode(cor2));
             jLabel2.setForeground(Color.decode(cor1));
@@ -110,6 +153,7 @@ public class Principal extends javax.swing.JFrame {
             txtGP.setForeground(Color.decode(cor1));
             txtGPinfo.setForeground(Color.decode(cor1));
             btnCorrida.setBackground(Color.decode(cor1));
+            jButton1.setBackground(Color.decode(cor1));
             //btnCorrida.setForeground(Color.decode(cor2));
             
             jButton2.setBackground(Color.decode(cor1));
@@ -156,6 +200,7 @@ public class Principal extends javax.swing.JFrame {
         txtImagemMotor = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtMotor = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         proximacorrida.setText("jTextField1");
 
@@ -292,12 +337,23 @@ public class Principal extends javax.swing.JFrame {
         txtMotor.setText("Motor");
         jPanel1.add(txtMotor, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 80, -1));
 
+        jButton1.setBackground(new java.awt.Color(51, 51, 51));
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("SALVAR JOGO");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(493, 10, 110, 30));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -317,10 +373,16 @@ public class Principal extends javax.swing.JFrame {
         setVisible(false);
         fds.frame(frame);
         fds.mousedrag(fds);
-        fds.pegadados(db.getText(),Integer.parseInt(idequipe.getText()),proximacorrida.getText());
+        try {
+            fds.pegadados(db.getText(),Integer.parseInt(idequipe.getText()),proximacorrida.getText(),savee);
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCorridaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        File file = new File("C:/automanager/"+savee+"/temp");
+        excluirtemp(file);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -332,6 +394,14 @@ public class Principal extends javax.swing.JFrame {
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
         mousedragg(evt);
     }//GEN-LAST:event_jPanel1MouseDragged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        InputSave input = new InputSave();
+        input.mensagem("Digite um nome para salvar", cor);
+        input.mousedrag(input);
+        input.preparasave(nomee, sexoo, idequipee, dbb, "0");
+        input.atualizadbparasave(frame);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,6 +448,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel imgPa3;
     private javax.swing.JLabel imgPiloto1;
     private javax.swing.JLabel imgPiloto2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

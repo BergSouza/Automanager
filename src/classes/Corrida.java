@@ -18,9 +18,9 @@ import javax.swing.ImageIcon;
  * @author Bergson
  */
 public class Corrida {
-    public static String baseP(String db, String numerocorrida, int linha) throws IOException{
+    public static String baseP(String db, String numerocorrida, int linha, String sav) throws IOException{
         try {
-            FileReader fr = new FileReader("C:/automanager/db/"+db+"/corridas/"+numerocorrida+".amc");
+            FileReader fr = new FileReader("C:/automanager/"+sav+"/"+db+"/corridas/"+numerocorrida+".amc");
             BufferedReader br = new BufferedReader(fr);
             for (int i = 0; i < linha-1; i++) {
                 br.readLine();
@@ -31,13 +31,77 @@ public class Corrida {
             return null;
         }
     }
-    public static ImageIcon getBandeira(String db, String numerocorrida){
-        ImageIcon icon = new ImageIcon("C:/automanager/db/"+db+"/corridas/"+numerocorrida+".png");
+    public static ImageIcon getBandeira(String db, String numerocorrida, String sav){
+        ImageIcon icon = new ImageIcon("C:/automanager/"+sav+"/"+db+"/corridas/"+numerocorrida+".png");
         return icon;
     }
-    public static String getTotalCorridas(String db) throws IOException{
+    public static String getPais(String db, String numerocorrida, String sav){
         try {
-            FileReader fr = new FileReader("C:/automanager/db/"+db+"/corridas/cinfo.amdb");
+            return baseP(db, numerocorrida, 1, sav);
+        } catch (IOException ex) {
+            Logger.getLogger(Corrida.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    public static String getPista(String db, String numerocorrida, String sav){
+        try {
+            return baseP(db, numerocorrida, 2, sav);
+        } catch (IOException ex) {
+            Logger.getLogger(Corrida.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    public static String getVoltas(String db, String numerocorrida, String sav){
+        try {
+            return baseP(db, numerocorrida, 3,sav);
+        } catch (IOException ex) {
+            Logger.getLogger(Corrida.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    public static String getCurvasPorc(String db, String numerocorrida, String sav){
+        try {
+            return baseP(db, numerocorrida, 4,sav);
+        } catch (IOException ex) {
+            Logger.getLogger(Corrida.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    public static String getPneu1(String db, String numerocorrida, String sav){
+        try {
+            return baseP(db, numerocorrida, 5,sav);
+        } catch (IOException ex) {
+            Logger.getLogger(Corrida.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    public static String getPneu2(String db, String numerocorrida, String sav){
+        try {
+            return baseP(db, numerocorrida, 6,sav);
+        } catch (IOException ex) {
+            Logger.getLogger(Corrida.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    public static String getPneu3(String db, String numerocorrida, String sav){
+        try {
+            return baseP(db, numerocorrida, 7,sav);
+        } catch (IOException ex) {
+            Logger.getLogger(Corrida.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    public static String getDistancia(String db, String numerocorrida, String sav){
+        try {
+            return baseP(db, numerocorrida, 8,sav)+" km";
+        } catch (IOException ex) {
+            Logger.getLogger(Corrida.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    public static String getTotalCorridas(String db, String sav) throws IOException{
+        try {
+            FileReader fr = new FileReader("C:/automanager/"+sav+"/"+db+"/corridas/cinfo.amdb");
             BufferedReader br = new BufferedReader(fr);
             return br.readLine();
         } catch (FileNotFoundException ex) {
