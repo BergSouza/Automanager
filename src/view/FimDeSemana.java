@@ -140,28 +140,38 @@ public class FimDeSemana extends javax.swing.JFrame {
         txtpneu32.setText(nomepn3/*+" [ "+quantidade_p32+" ]"*/);
         
         
-        String abc = (max_pneusp2-quantidade_p11-quantidade_p21-quantidade_p31)+" Restantes ";
+        int o = 0;
+        
+        String abc = (max_pneusp1-quantidade_p11-quantidade_p21-quantidade_p31)+" Restantes ";
         if((max_pneusp1-quantidade_p11-quantidade_p21-quantidade_p31) < 0){
             pneusrestantesp1.setText((abc)+" Número NEGATIVO!");
-            jButton2.setEnabled(false);
+            o = 0;
         }else if((max_pneusp1-quantidade_p11-quantidade_p21-quantidade_p31) == 0){
             pneusrestantesp1.setText((abc));
-            jButton2.setEnabled(true);
+            o = 1;
         }else{
             pneusrestantesp1.setText((abc));
-            jButton2.setEnabled(false);
+            o = 0;
         }
         
+        int p = 0;
         String abc2 = (max_pneusp2-quantidade_p12-quantidade_p22-quantidade_p32)+" Restantes ";
         if((max_pneusp2-quantidade_p12-quantidade_p22-quantidade_p32) < 0){
             pneusrestantesp2.setText((abc2)+" Número NEGATIVO!");
-            jButton2.setEnabled(false);
+            p = 0;
         }else if((max_pneusp2-quantidade_p12-quantidade_p22-quantidade_p32) == 0){
             pneusrestantesp2.setText((abc2));
-            jButton2.setEnabled(true);
+            p = 1;
         }else{
             pneusrestantesp2.setText((abc2));
+            p = 0;
+        }
+        
+        if(o == 0 || p == 0){
             jButton2.setEnabled(false);
+        }
+        if(o == 1 && p == 1){
+            jButton2.setEnabled(true);
         }
     }/*
     public void atualizatxtpneusmenos(JLabel label){
@@ -200,12 +210,6 @@ public class FimDeSemana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnmenosp11 = new javax.swing.JButton();
-        btnmaisp11 = new javax.swing.JButton();
-        btnmenosp21 = new javax.swing.JButton();
-        btnmaisp21 = new javax.swing.JButton();
-        btnmenosp31 = new javax.swing.JButton();
-        btnmaisp31 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -236,48 +240,6 @@ public class FimDeSemana extends javax.swing.JFrame {
         selecaopneu12 = new javax.swing.JComboBox<>();
         selecaopneu22 = new javax.swing.JComboBox<>();
         selecaopneu32 = new javax.swing.JComboBox<>();
-
-        btnmenosp11.setText("-");
-        btnmenosp11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmenosp11ActionPerformed(evt);
-            }
-        });
-
-        btnmaisp11.setText("+");
-        btnmaisp11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmaisp11ActionPerformed(evt);
-            }
-        });
-
-        btnmenosp21.setText("-");
-        btnmenosp21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmenosp21ActionPerformed(evt);
-            }
-        });
-
-        btnmaisp21.setText("+");
-        btnmaisp21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmaisp21ActionPerformed(evt);
-            }
-        });
-
-        btnmenosp31.setText("-");
-        btnmenosp31.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmenosp31ActionPerformed(evt);
-            }
-        });
-
-        btnmaisp31.setText("+");
-        btnmaisp31.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnmaisp31ActionPerformed(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -494,75 +456,6 @@ public class FimDeSemana extends javax.swing.JFrame {
         f.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btnmenosp11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenosp11ActionPerformed
-        /*if(quantidade_p11-1 < 0){
-            btnmenosp11.setEnabled(false);
-        }else{
-            quantidade_p11--;
-            btnmenosp11.setEnabled(true);
-        }
-        btnmaisp11.setEnabled(true);
-        atualizatxtpneusmenos(pneusrestantesp1);*/
-    }//GEN-LAST:event_btnmenosp11ActionPerformed
-
-    private void btnmaisp11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmaisp11ActionPerformed
-        if(quantidade_p11+1 > 10){
-            btnmaisp11.setEnabled(false);
-        }
-        else{
-            quantidade_p11++;
-            btnmaisp11.setEnabled(true);
-        }
-        btnmenosp11.setEnabled(true);
-        //atualizatxtpneusmais(pneusrestantesp1);
-    }//GEN-LAST:event_btnmaisp11ActionPerformed
-
-    private void btnmenosp21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenosp21ActionPerformed
-        if(quantidade_p21-1 < 0){
-            btnmenosp11.setEnabled(false);
-        }else{
-            quantidade_p21--;
-            btnmenosp11.setEnabled(true);
-        }
-        btnmaisp21.setEnabled(true);
-        //atualizatxtpneusmenos(pneusrestantesp1);
-    }//GEN-LAST:event_btnmenosp21ActionPerformed
-
-    private void btnmaisp21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmaisp21ActionPerformed
-        if(quantidade_p21+1 > 10){
-            btnmaisp21.setEnabled(false);
-        }
-        else{
-            quantidade_p21++;
-            btnmaisp21.setEnabled(true);
-        }
-        btnmenosp11.setEnabled(true);
-        //atualizatxtpneusmais(pneusrestantesp1);
-    }//GEN-LAST:event_btnmaisp21ActionPerformed
-
-    private void btnmaisp31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmaisp31ActionPerformed
-        if(quantidade_p31+1 > 10){
-            btnmaisp11.setEnabled(false);
-        }
-        else{
-            quantidade_p31++;
-            btnmaisp11.setEnabled(true);
-        }
-        btnmenosp31.setEnabled(true);
-        //atualizatxtpneusmais(pneusrestantesp1);
-    }//GEN-LAST:event_btnmaisp31ActionPerformed
-
-    private void btnmenosp31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenosp31ActionPerformed
-        if(quantidade_p31-1 < 0){
-            btnmenosp11.setEnabled(false);
-        }else{
-            quantidade_p31--;
-            btnmenosp11.setEnabled(true);
-        }
-        btnmaisp31.setEnabled(true);
-        //atualizatxtpneusmenos(pneusrestantesp1);
-    }//GEN-LAST:event_btnmenosp31ActionPerformed
-
     private void selecaopneu11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecaopneu11ActionPerformed
         quantidade_p11 = Integer.parseInt((String) selecaopneu11.getSelectedItem());
         atualizapneus();
@@ -581,7 +474,7 @@ public class FimDeSemana extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         FimSemana fs = new FimSemana();
         try {
-            fs.salvaPneus(dbb,idequipee,savee, quantidade_p11,quantidade_p21,quantidade_p31,quantidade_p12,quantidade_p22,quantidade_p31,Integer.toString(idcorridaa));
+            fs.salvaPneus(dbb,idequipee,savee, quantidade_p11,quantidade_p21,quantidade_p31,quantidade_p12,quantidade_p22,quantidade_p32,Integer.toString(idcorridaa));
         } catch (IOException ex) {
             Logger.getLogger(FimDeSemana.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -638,12 +531,6 @@ public class FimDeSemana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnmaisp11;
-    private javax.swing.JButton btnmaisp21;
-    private javax.swing.JButton btnmaisp31;
-    private javax.swing.JButton btnmenosp11;
-    private javax.swing.JButton btnmenosp21;
-    private javax.swing.JButton btnmenosp31;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
