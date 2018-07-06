@@ -7,6 +7,7 @@ package view;
 
 import classes.Corrida;
 import classes.Equipe;
+import classes.FimSemana;
 import classes.Piloto;
 import classes.Pneu;
 import java.awt.Color;
@@ -16,6 +17,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,6 +28,23 @@ public class FimDeSemana extends javax.swing.JFrame {
     private static Point point = new Point();
     private static JFrame frame = new JFrame();
     private static String savee = null;
+    private static int idequipee = 0;
+    private static String dbb = null;
+    private static int idcorridaa = 0;
+    
+    private static int max_pneusp1 = 13;
+    private static int max_pneusp2 = 13;
+    private static int quantidade_p11 = 1;
+    private static int quantidade_p21 = 1;
+    private static int quantidade_p31 = 1;
+    private static int quantidade_p12 = 1;
+    private static int quantidade_p22 = 1;
+    private static int quantidade_p32 = 1;
+    
+    
+    private static String nomepn1 = null;
+    private static String nomepn2 = null;
+    private static String nomepn3 = null;
     
     JFrame f = new JFrame();
     public void frame(JFrame frame){
@@ -38,6 +58,9 @@ public class FimDeSemana extends javax.swing.JFrame {
         frame.setLocation(p.x + evt.getX() - point.x, p.y + evt.getY() - point.y);
     }
     public void pegadados(String db,int idequipe,String idcorrida,String save) throws IOException{
+        idequipee = idequipe;
+        dbb = db;
+        idcorridaa = Integer.parseInt(idcorrida);
         savee = save;
         setacores(db,idequipe);
         String p1sobrenome = Piloto.getSobrenome(db, Equipe.getIdP1(db, idequipe, savee),savee);
@@ -66,12 +89,10 @@ public class FimDeSemana extends javax.swing.JFrame {
             pneu22.setIcon(Pneu.getImagem(db, idpneu2));
             pneu31.setIcon(Pneu.getImagem(db, idpneu3));
             pneu32.setIcon(Pneu.getImagem(db, idpneu3));
-            txtpneu11.setText(Pneu.getNome(db, idpneu1));
-            txtpneu21.setText(Pneu.getNome(db, idpneu2));
-            txtpneu31.setText(Pneu.getNome(db, idpneu3));
-            txtpneu12.setText(Pneu.getNome(db, idpneu1));
-            txtpneu22.setText(Pneu.getNome(db, idpneu2));
-            txtpneu32.setText(Pneu.getNome(db, idpneu3));
+            nomepn1 = Pneu.getNome(db, idpneu1);
+            nomepn2 = Pneu.getNome(db, idpneu2);
+            nomepn3 = Pneu.getNome(db, idpneu3);
+            atualizapneus();
         } catch (IOException ex) {
             Logger.getLogger(FimDeSemana.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -93,10 +114,78 @@ public class FimDeSemana extends javax.swing.JFrame {
             txtpneu12.setForeground(Color.decode(cor1));
             txtpneu22.setForeground(Color.decode(cor1));
             txtpneu32.setForeground(Color.decode(cor1));
+            selecaopneu11.setBackground(Color.decode(cor1));
+            selecaopneu11.setForeground(Color.decode("#ffffff"));
+            selecaopneu21.setBackground(Color.decode(cor1));
+            selecaopneu21.setForeground(Color.decode("#ffffff"));
+            selecaopneu31.setBackground(Color.decode(cor1));
+            selecaopneu31.setForeground(Color.decode("#ffffff"));
+            selecaopneu12.setBackground(Color.decode(cor1));
+            selecaopneu12.setForeground(Color.decode("#ffffff"));
+            selecaopneu22.setBackground(Color.decode(cor1));
+            selecaopneu22.setForeground(Color.decode("#ffffff"));
+            selecaopneu32.setBackground(Color.decode(cor1));
+            selecaopneu32.setForeground(Color.decode("#ffffff"));
+            jButton2.setBackground(Color.decode(cor1));
         } catch (IOException ex) {
             Logger.getLogger(FimDeSemana.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void atualizapneus(){
+        txtpneu11.setText(nomepn1/*+" [ "+quantidade_p11+" ]"*/);
+        txtpneu21.setText(nomepn2/*+" [ "+quantidade_p21+" ]"*/);
+        txtpneu31.setText(nomepn3/*+" [ "+quantidade_p31+" ]"*/);
+        txtpneu12.setText(nomepn1/*+" [ "+quantidade_p12+" ]"*/);
+        txtpneu22.setText(nomepn2/*+" [ "+quantidade_p22+" ]"*/);
+        txtpneu32.setText(nomepn3/*+" [ "+quantidade_p32+" ]"*/);
+        
+        
+        String abc = (max_pneusp2-quantidade_p11-quantidade_p21-quantidade_p31)+" Restantes ";
+        if((max_pneusp1-quantidade_p11-quantidade_p21-quantidade_p31) < 0){
+            pneusrestantesp1.setText((abc)+" Número NEGATIVO!");
+            jButton2.setEnabled(false);
+        }else if((max_pneusp1-quantidade_p11-quantidade_p21-quantidade_p31) == 0){
+            pneusrestantesp1.setText((abc));
+            jButton2.setEnabled(true);
+        }else{
+            pneusrestantesp1.setText((abc));
+            jButton2.setEnabled(false);
+        }
+        
+        String abc2 = (max_pneusp2-quantidade_p12-quantidade_p22-quantidade_p32)+" Restantes ";
+        if((max_pneusp2-quantidade_p12-quantidade_p22-quantidade_p32) < 0){
+            pneusrestantesp2.setText((abc2)+" Número NEGATIVO!");
+            jButton2.setEnabled(false);
+        }else if((max_pneusp2-quantidade_p12-quantidade_p22-quantidade_p32) == 0){
+            pneusrestantesp2.setText((abc2));
+            jButton2.setEnabled(true);
+        }else{
+            pneusrestantesp2.setText((abc2));
+            jButton2.setEnabled(false);
+        }
+    }/*
+    public void atualizatxtpneusmenos(JLabel label){
+        int num = (max_pneus-quantidade_p11+quantidade_p21+quantidade_p31);
+        label.setText(num+" Restantes");
+        atualizapneus();
+            btnmaisp11.setEnabled(true);
+            btnmaisp21.setEnabled(true);
+            btnmaisp31.setEnabled(true);
+    }
+    public void atualizatxtpneusmais(JLabel label){
+        int num = (max_pneus-quantidade_p11+quantidade_p21+quantidade_p31);
+        label.setText(num+" Restantes");
+        if(num >= 13){
+            btnmaisp11.setEnabled(false);
+            btnmaisp21.setEnabled(false);
+            btnmaisp31.setEnabled(false);
+        }/*else{
+            btnmaisp11.setEnabled(true);
+            btnmaisp21.setEnabled(true);
+            btnmaisp31.setEnabled(true);
+        }
+        atualizapneus();
+    }*/
     
     public FimDeSemana() {
         initComponents();
@@ -111,6 +200,12 @@ public class FimDeSemana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnmenosp11 = new javax.swing.JButton();
+        btnmaisp11 = new javax.swing.JButton();
+        btnmenosp21 = new javax.swing.JButton();
+        btnmaisp21 = new javax.swing.JButton();
+        btnmenosp31 = new javax.swing.JButton();
+        btnmaisp31 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -132,6 +227,57 @@ public class FimDeSemana extends javax.swing.JFrame {
         txtpneu12 = new javax.swing.JLabel();
         txtpneu22 = new javax.swing.JLabel();
         txtpneu32 = new javax.swing.JLabel();
+        pneusrestantesp2 = new javax.swing.JLabel();
+        pneusrestantesp1 = new javax.swing.JLabel();
+        selecaopneu11 = new javax.swing.JComboBox<>();
+        selecaopneu21 = new javax.swing.JComboBox<>();
+        selecaopneu31 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        selecaopneu12 = new javax.swing.JComboBox<>();
+        selecaopneu22 = new javax.swing.JComboBox<>();
+        selecaopneu32 = new javax.swing.JComboBox<>();
+
+        btnmenosp11.setText("-");
+        btnmenosp11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenosp11ActionPerformed(evt);
+            }
+        });
+
+        btnmaisp11.setText("+");
+        btnmaisp11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmaisp11ActionPerformed(evt);
+            }
+        });
+
+        btnmenosp21.setText("-");
+        btnmenosp21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenosp21ActionPerformed(evt);
+            }
+        });
+
+        btnmaisp21.setText("+");
+        btnmaisp21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmaisp21ActionPerformed(evt);
+            }
+        });
+
+        btnmenosp31.setText("-");
+        btnmenosp31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenosp31ActionPerformed(evt);
+            }
+        });
+
+        btnmaisp31.setText("+");
+        btnmaisp31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmaisp31ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -198,7 +344,7 @@ public class FimDeSemana extends javax.swing.JFrame {
         txtpneusp2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtpneusp2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtpneusp2.setText("SELEÇÃO DE PNEUS - PILOTO 2");
-        jPanel1.add(txtpneusp2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 260, 30));
+        jPanel1.add(txtpneusp2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 260, 30));
 
         pneu12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/pneu.png"))); // NOI18N
         jPanel1.add(pneu12, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
@@ -212,7 +358,7 @@ public class FimDeSemana extends javax.swing.JFrame {
         txtpneusp1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtpneusp1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtpneusp1.setText("SELEÇÃO DE PNEUS - PILOTO 1");
-        jPanel1.add(txtpneusp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 260, 30));
+        jPanel1.add(txtpneusp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 260, 30));
 
         pneu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/pneu.png"))); // NOI18N
         jPanel1.add(pneu11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
@@ -223,29 +369,102 @@ public class FimDeSemana extends javax.swing.JFrame {
         pneu31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/pneu.png"))); // NOI18N
         jPanel1.add(pneu31, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, -1, -1));
 
+        txtpneu11.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         txtpneu11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtpneu11.setText("Ultra Soft");
+        txtpneu11.setText("Ultra Soft [ 0 ]");
         jPanel1.add(txtpneu11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 80, -1));
 
+        txtpneu21.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         txtpneu21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtpneu21.setText("Ultra Soft");
+        txtpneu21.setText("Ultra Soft [ 0 ]");
         jPanel1.add(txtpneu21, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 80, -1));
 
+        txtpneu31.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         txtpneu31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtpneu31.setText("Ultra Soft");
+        txtpneu31.setText("Ultra Soft [ 0 ]");
         jPanel1.add(txtpneu31, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, 80, -1));
 
+        txtpneu12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         txtpneu12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtpneu12.setText("Ultra Soft");
+        txtpneu12.setText("Ultra Soft [ 0 ]");
         jPanel1.add(txtpneu12, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 280, 80, -1));
 
+        txtpneu22.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         txtpneu22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtpneu22.setText("Ultra Soft");
+        txtpneu22.setText("Ultra Soft [ 0 ]");
         jPanel1.add(txtpneu22, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, 80, -1));
 
+        txtpneu32.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         txtpneu32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtpneu32.setText("Ultra Soft");
+        txtpneu32.setText("Ultra Soft [ 0 ]");
         jPanel1.add(txtpneu32, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 280, 80, -1));
+
+        pneusrestantesp2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pneusrestantesp2.setText("13 Restantes");
+        jPanel1.add(pneusrestantesp2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 270, -1));
+
+        pneusrestantesp1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pneusrestantesp1.setText("13 Restantes");
+        jPanel1.add(pneusrestantesp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 280, -1));
+
+        selecaopneu11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        selecaopneu11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecaopneu11ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(selecaopneu11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 80, -1));
+
+        selecaopneu21.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        selecaopneu21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecaopneu21ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(selecaopneu21, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 80, -1));
+
+        selecaopneu31.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        selecaopneu31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecaopneu31ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(selecaopneu31, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 80, -1));
+
+        jButton2.setBackground(new java.awt.Color(51, 51, 51));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Continuar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, 110, 40));
+
+        selecaopneu12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        selecaopneu12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecaopneu12ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(selecaopneu12, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 80, -1));
+
+        selecaopneu22.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        selecaopneu22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecaopneu22ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(selecaopneu22, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, 80, -1));
+
+        selecaopneu32.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        selecaopneu32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecaopneu32ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(selecaopneu32, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 80, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -274,6 +493,114 @@ public class FimDeSemana extends javax.swing.JFrame {
         dispose();
         f.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnmenosp11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenosp11ActionPerformed
+        /*if(quantidade_p11-1 < 0){
+            btnmenosp11.setEnabled(false);
+        }else{
+            quantidade_p11--;
+            btnmenosp11.setEnabled(true);
+        }
+        btnmaisp11.setEnabled(true);
+        atualizatxtpneusmenos(pneusrestantesp1);*/
+    }//GEN-LAST:event_btnmenosp11ActionPerformed
+
+    private void btnmaisp11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmaisp11ActionPerformed
+        if(quantidade_p11+1 > 10){
+            btnmaisp11.setEnabled(false);
+        }
+        else{
+            quantidade_p11++;
+            btnmaisp11.setEnabled(true);
+        }
+        btnmenosp11.setEnabled(true);
+        //atualizatxtpneusmais(pneusrestantesp1);
+    }//GEN-LAST:event_btnmaisp11ActionPerformed
+
+    private void btnmenosp21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenosp21ActionPerformed
+        if(quantidade_p21-1 < 0){
+            btnmenosp11.setEnabled(false);
+        }else{
+            quantidade_p21--;
+            btnmenosp11.setEnabled(true);
+        }
+        btnmaisp21.setEnabled(true);
+        //atualizatxtpneusmenos(pneusrestantesp1);
+    }//GEN-LAST:event_btnmenosp21ActionPerformed
+
+    private void btnmaisp21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmaisp21ActionPerformed
+        if(quantidade_p21+1 > 10){
+            btnmaisp21.setEnabled(false);
+        }
+        else{
+            quantidade_p21++;
+            btnmaisp21.setEnabled(true);
+        }
+        btnmenosp11.setEnabled(true);
+        //atualizatxtpneusmais(pneusrestantesp1);
+    }//GEN-LAST:event_btnmaisp21ActionPerformed
+
+    private void btnmaisp31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmaisp31ActionPerformed
+        if(quantidade_p31+1 > 10){
+            btnmaisp11.setEnabled(false);
+        }
+        else{
+            quantidade_p31++;
+            btnmaisp11.setEnabled(true);
+        }
+        btnmenosp31.setEnabled(true);
+        //atualizatxtpneusmais(pneusrestantesp1);
+    }//GEN-LAST:event_btnmaisp31ActionPerformed
+
+    private void btnmenosp31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenosp31ActionPerformed
+        if(quantidade_p31-1 < 0){
+            btnmenosp11.setEnabled(false);
+        }else{
+            quantidade_p31--;
+            btnmenosp11.setEnabled(true);
+        }
+        btnmaisp31.setEnabled(true);
+        //atualizatxtpneusmenos(pneusrestantesp1);
+    }//GEN-LAST:event_btnmenosp31ActionPerformed
+
+    private void selecaopneu11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecaopneu11ActionPerformed
+        quantidade_p11 = Integer.parseInt((String) selecaopneu11.getSelectedItem());
+        atualizapneus();
+    }//GEN-LAST:event_selecaopneu11ActionPerformed
+
+    private void selecaopneu21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecaopneu21ActionPerformed
+        quantidade_p21 = Integer.parseInt((String) selecaopneu21.getSelectedItem());
+        atualizapneus();
+    }//GEN-LAST:event_selecaopneu21ActionPerformed
+
+    private void selecaopneu31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecaopneu31ActionPerformed
+        quantidade_p31 = Integer.parseInt((String) selecaopneu31.getSelectedItem());
+        atualizapneus();
+    }//GEN-LAST:event_selecaopneu31ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        FimSemana fs = new FimSemana();
+        try {
+            fs.salvaPneus(dbb,idequipee,savee, quantidade_p11,quantidade_p21,quantidade_p31,quantidade_p12,quantidade_p22,quantidade_p31,Integer.toString(idcorridaa));
+        } catch (IOException ex) {
+            Logger.getLogger(FimDeSemana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void selecaopneu12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecaopneu12ActionPerformed
+        quantidade_p12 = Integer.parseInt((String) selecaopneu12.getSelectedItem());
+        atualizapneus();
+    }//GEN-LAST:event_selecaopneu12ActionPerformed
+
+    private void selecaopneu22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecaopneu22ActionPerformed
+        quantidade_p22 = Integer.parseInt((String) selecaopneu22.getSelectedItem());
+        atualizapneus();
+    }//GEN-LAST:event_selecaopneu22ActionPerformed
+
+    private void selecaopneu32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecaopneu32ActionPerformed
+        quantidade_p32 = Integer.parseInt((String) selecaopneu32.getSelectedItem());
+        atualizapneus();
+    }//GEN-LAST:event_selecaopneu32ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,7 +638,14 @@ public class FimDeSemana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnmaisp11;
+    private javax.swing.JButton btnmaisp21;
+    private javax.swing.JButton btnmaisp31;
+    private javax.swing.JButton btnmenosp11;
+    private javax.swing.JButton btnmenosp21;
+    private javax.swing.JButton btnmenosp31;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -321,6 +655,14 @@ public class FimDeSemana extends javax.swing.JFrame {
     private javax.swing.JLabel pneu22;
     private javax.swing.JLabel pneu31;
     private javax.swing.JLabel pneu32;
+    private javax.swing.JLabel pneusrestantesp1;
+    private javax.swing.JLabel pneusrestantesp2;
+    private javax.swing.JComboBox<String> selecaopneu11;
+    private javax.swing.JComboBox<String> selecaopneu12;
+    private javax.swing.JComboBox<String> selecaopneu21;
+    private javax.swing.JComboBox<String> selecaopneu22;
+    private javax.swing.JComboBox<String> selecaopneu31;
+    private javax.swing.JComboBox<String> selecaopneu32;
     private javax.swing.JLabel txtBandeira;
     private javax.swing.JLabel txtDistancia;
     private javax.swing.JLabel txtLocal;

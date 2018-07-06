@@ -788,7 +788,7 @@ public class Novojogo extends javax.swing.JFrame {
         p.setVisible(true);
         p.setLocationRelativeTo(null);
         try {
-            p.recebedados(campoNome.getText(), sexo,(String) selectDB.getSelectedItem(), Integer.parseInt(campoEquipe.getText()),"db");
+            p.recebedados(campoNome.getText(), sexo,(String) selectDB.getSelectedItem(), Integer.parseInt(campoEquipe.getText()),"db",1);
             p.mousedrag(p);
             dispose();
         } catch (IOException ex) {

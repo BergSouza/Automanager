@@ -46,6 +46,7 @@ public class CarregarJogo extends javax.swing.JFrame {
             Mensagem msg = new Mensagem();
             msg.mensagem("Save não existe!", "#99CCFF");
             msg.mousedrag(msg);
+            carregasaves();
         }
     }
 

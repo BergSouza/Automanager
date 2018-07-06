@@ -43,10 +43,28 @@ public class FuncoesGerais {
             String sexo = retornalinha(arquivo, 3);
             String db = retornalinha(arquivo, 4);
             Principal p = new Principal();
-            p.recebedados(nome, sexo, save, idequipe, "saves");
+            p.recebedados(nome, sexo, save, idequipe, "saves", 0);
             p.setVisible(true);
             p.setLocationRelativeTo(null);
             p.mousedrag(p);
         }
+    }
+    public static int totalpilotos() throws FileNotFoundException, IOException{
+        FileReader fr = new FileReader("C:/automanager/db/temp/dbinfo.amdi");
+        BufferedReader br = new BufferedReader(fr);
+        br.readLine();
+        br.readLine();
+        return Integer.parseInt(br.readLine());
+    }
+    public static int totalequipes() throws FileNotFoundException, IOException{
+        FileReader fr = new FileReader("C:/automanager/db/temp/dbinfo.amdi");
+        BufferedReader br = new BufferedReader(fr);
+        br.readLine();
+        return Integer.parseInt(br.readLine());
+    }
+    public static String nomedb() throws FileNotFoundException, IOException{
+        FileReader fr = new FileReader("C:/automanager/db/temp/dbinfo.amdi");
+        BufferedReader br = new BufferedReader(fr);
+        return br.readLine();
     }
 }

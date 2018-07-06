@@ -74,12 +74,6 @@ public class InputSave extends javax.swing.JFrame {
     
     public void salvarjogo(){
         String save = jTextField1.getText();
-        String sav = null;
-        if(savee == "0"){
-            sav = "db";
-        }else{
-            sav = "saves";
-        }
         File origem = new File("C:/automanager/db/temp/");
         File destino = new File("C:/automanager/saves/"+save);
         
@@ -123,15 +117,18 @@ public class InputSave extends javax.swing.JFrame {
                 bw.newLine();
                 bw.write(sexoo);
                 bw.newLine();
-                bw.write(dbb);
-                bw.newLine();
                 bw.close();
                 fw.close();
-                if(savee == "0"){
-                    framee.dispose();
+                
+                
+                    
                     FuncoesGerais fg = new FuncoesGerais();
                     fg.carregajogo(save);
-                }
+                    
+                    JOptionPane.showMessageDialog(null,"A");
+                    framee.dispose();
+                    JOptionPane.showMessageDialog(null,"B");
+                
                 
                 /*JOptionPane.showMessageDialog(null, f);
                 JOptionPane.showMessageDialog(null, idequipee);

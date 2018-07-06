@@ -289,6 +289,7 @@ public class Inicio extends javax.swing.JFrame {
         CarregarJogo cj;
         try {
             cj = new CarregarJogo();
+            dispose();
             //cj.setVisible(true);
             //cj.setLocationRelativeTo(null);
         } catch (IOException ex) {

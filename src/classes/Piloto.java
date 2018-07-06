@@ -32,7 +32,6 @@ public class Piloto {
                 char[] pnomechar = pnomep1.toCharArray();
                 return pnomechar[0]+". ";
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(Novojogo.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
             }
     }
@@ -48,7 +47,6 @@ public class Piloto {
                 char[] pnomechar = pnomep1.toCharArray();
                 return pnomechar[0]+". ";
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(Novojogo.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
             }
     }
@@ -63,7 +61,6 @@ public class Piloto {
                 String pnomep1 = br.readLine();
                 return pnomep1;
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(Novojogo.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
             }
     }
@@ -78,7 +75,6 @@ public class Piloto {
                 String pnomep1 = br.readLine();
                 return pnomep1;
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(Novojogo.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
             }
     }

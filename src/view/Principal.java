@@ -7,6 +7,7 @@ package view;
 import automanager.Automanager;
 import classes.Equipe;
 import classes.Corrida;
+import classes.FuncoesGerais;
 import classes.Motor;
 import classes.Patrocinio;
 import classes.Piloto;
@@ -14,8 +15,10 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +36,7 @@ public class Principal extends javax.swing.JFrame {
     private static String sexoo = null;
     private static String idequipee = null;
     private static String savee = null;
+    private static int novojogoo = 0;
     /**
      * Creates new form Principal
      */
@@ -42,7 +46,7 @@ public class Principal extends javax.swing.JFrame {
     
     public void temp(String db){
         File origem = new File("C:/automanager/"+savee+"/"+db);
-        File destino = new File("C:/automanager/"+savee+"/temp");
+        File destino = new File("C:/automanager/db/temp");
         this.db.setText("temp");
         dbb = "temp";
         try {
@@ -71,12 +75,13 @@ public class Principal extends javax.swing.JFrame {
         frame.setLocation(p.x + evt.getX() - point.x, p.y + evt.getY() - point.y);
     }
         
-    public void recebedados(String nome,String sexo,String db,int idequipe, String save) throws IOException{
+    public void recebedados(String nome,String sexo,String db,int idequipe, String save, int novojogo) throws IOException{
         String dbb = db;
         nomee = nome;
         sexoo = sexo;
         idequipee = Integer.toString(idequipe);
         dbb = db;
+        novojogoo = novojogo;
         this.idequipe.setText(Integer.toString(idequipe));
         savee = save;
         txtChefe.setText(nome);
@@ -162,6 +167,64 @@ public class Principal extends javax.swing.JFrame {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void salvarjogo(){
+        String save = dbb;
+        String sav = null;
+        File origem = new File("C:/automanager/db/temp/");
+        File destino = new File("C:/automanager/saves/"+save);
+            try {
+            Automanager.copyAll(origem, destino, true);
+                File f = new File("C:/automanager/saves/"+save+"/save.ams");
+                //File f2 = new File("C:/automanager/saves/saves.amsdb");
+                //FileWriter fw2 = new FileWriter(f2);
+                //BufferedWriter bw2 = new BufferedWriter(fw2);
+                //FileReader fr = new FileReader(f2);
+                //BufferedReader br = new BufferedReader(fr);
+                //String[] arrayx = null;
+                //int b = Integer.parseInt(br.readLine());
+                //int a = 0;
+                //int c = 0;
+                
+                //salva
+                //while(a < b){
+                 //   aux[a] = br.readLine();
+                //    a++;
+                //}
+                /*a = 0;
+                //grava
+                bw2.write(b++);
+                while(a < b-1){
+                    bw2.write(aux[a]);
+                    a++;
+                }
+                bw2.write(save);
+                bw2.close();*/
+                FileWriter fw = new FileWriter(f);
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(idequipee);
+                bw.newLine();
+                bw.write(nomee);
+                bw.newLine();
+                bw.write(sexoo);
+                bw.newLine();
+                bw.write(dbb);
+                bw.newLine();
+                bw.close();
+                fw.close();
+                
+                /*JOptionPane.showMessageDialog(null, f);
+                JOptionPane.showMessageDialog(null, idequipee);
+                JOptionPane.showMessageDialog(null, nomee);
+                JOptionPane.showMessageDialog(null, sexoo);*/
+            } catch (IOException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedOperationException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            MensagemSucesso msg = new MensagemSucesso();
+            msg.mensagem("Jogo Salvo com Sucesso!!", cor);
+            msg.mousedrag(msg);
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -384,6 +447,7 @@ public class Principal extends javax.swing.JFrame {
         File file = new File("C:/automanager/"+savee+"/temp");
         excluirtemp(file);
         dispose();
+        System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
@@ -396,11 +460,15 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        InputSave input = new InputSave();
-        input.mensagem("Digite um nome para salvar", cor);
-        input.mousedrag(input);
-        input.preparasave(nomee, sexoo, idequipee, dbb, "0");
-        input.atualizadbparasave(frame);
+        if(novojogoo == 0){
+            salvarjogo();
+        }if(novojogoo == 1){
+            InputSave input = new InputSave();
+            input.mensagem("Digite um nome para salvar", cor);
+            input.mousedrag(input);
+            input.preparasave(nomee, sexoo, idequipee, dbb, "0");
+            input.atualizadbparasave(frame);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
