@@ -46,7 +46,12 @@ public class Principal extends javax.swing.JFrame {
     
     public void temp(String db){
         File origem = new File("C:/automanager/"+savee+"/"+db);
-        File destino = new File("C:/automanager/db/temp");
+        File destino = new File("C:/automanager/"+savee+"/temp");
+        if(destino.exists()){
+            
+        }else{
+            destino.mkdir();
+        }
         this.db.setText("temp");
         dbb = "temp";
         try {
@@ -170,7 +175,7 @@ public class Principal extends javax.swing.JFrame {
     public void salvarjogo(){
         String save = dbb;
         String sav = null;
-        File origem = new File("C:/automanager/db/temp/");
+        File origem = new File("C:/automanager/"+savee+"/temp/");
         File destino = new File("C:/automanager/saves/"+save);
             try {
             Automanager.copyAll(origem, destino, true);

@@ -83,15 +83,15 @@ public class FimDeSemana extends javax.swing.JFrame {
        int idpneu2 = Integer.parseInt(Corrida.getPneu2(db, idcorrida,savee));
        int idpneu3 = Integer.parseInt(Corrida.getPneu3(db, idcorrida,savee));
         try {
-            pneu11.setIcon(Pneu.getImagem(db, idpneu1));
-            pneu12.setIcon(Pneu.getImagem(db, idpneu1));
-            pneu21.setIcon(Pneu.getImagem(db, idpneu2));
-            pneu22.setIcon(Pneu.getImagem(db, idpneu2));
-            pneu31.setIcon(Pneu.getImagem(db, idpneu3));
-            pneu32.setIcon(Pneu.getImagem(db, idpneu3));
-            nomepn1 = Pneu.getNome(db, idpneu1);
-            nomepn2 = Pneu.getNome(db, idpneu2);
-            nomepn3 = Pneu.getNome(db, idpneu3);
+            pneu11.setIcon(Pneu.getImagem(db, idpneu1, savee));
+            pneu12.setIcon(Pneu.getImagem(db, idpneu1, savee));
+            pneu21.setIcon(Pneu.getImagem(db, idpneu2, savee));
+            pneu22.setIcon(Pneu.getImagem(db, idpneu2, savee));
+            pneu31.setIcon(Pneu.getImagem(db, idpneu3, savee));
+            pneu32.setIcon(Pneu.getImagem(db, idpneu3, savee));
+            nomepn1 = Pneu.getNome(db, idpneu1, savee);
+            nomepn2 = Pneu.getNome(db, idpneu2, savee);
+            nomepn3 = Pneu.getNome(db, idpneu3, savee);
             atualizapneus();
         } catch (IOException ex) {
             Logger.getLogger(FimDeSemana.class.getName()).log(Level.SEVERE, null, ex);

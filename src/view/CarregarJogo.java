@@ -40,13 +40,16 @@ public class CarregarJogo extends javax.swing.JFrame {
         String arquivo = ("C:/automanager/saves/"+save+"/save.ams");
         File file = new File(arquivo);
         if(file.exists()){
+            dispose();
             fg.carregajogo(save);
             //JOptionPane.showConfirmDialog(null, arquivo);
         }else{
             Mensagem msg = new Mensagem();
             msg.mensagem("Save não existe!", "#99CCFF");
             msg.mousedrag(msg);
-            carregasaves();
+            Inicio inicio = new Inicio();
+            inicio.setVisible(true);
+            inicio.setLocationRelativeTo(null);
         }
     }
 

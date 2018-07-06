@@ -409,7 +409,7 @@ public class Novojogo extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cb7.setBackground(new java.awt.Color(255, 255, 255));
-        cb7.setForeground(new java.awt.Color(102, 153, 255));
+        cb7.setForeground(new java.awt.Color(51, 51, 51));
         cb7.setText("Equipe 7");
         cb7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -419,7 +419,7 @@ public class Novojogo extends javax.swing.JFrame {
         jPanel1.add(cb7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 140, -1));
 
         cb10.setBackground(new java.awt.Color(255, 255, 255));
-        cb10.setForeground(new java.awt.Color(102, 153, 255));
+        cb10.setForeground(new java.awt.Color(51, 51, 51));
         cb10.setText("Equipe 10");
         cb10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -429,7 +429,7 @@ public class Novojogo extends javax.swing.JFrame {
         jPanel1.add(cb10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 140, -1));
 
         cb8.setBackground(new java.awt.Color(255, 255, 255));
-        cb8.setForeground(new java.awt.Color(102, 153, 255));
+        cb8.setForeground(new java.awt.Color(51, 51, 51));
         cb8.setText("Equipe 8");
         cb8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -439,7 +439,7 @@ public class Novojogo extends javax.swing.JFrame {
         jPanel1.add(cb8, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 130, -1));
 
         cb2.setBackground(new java.awt.Color(255, 255, 255));
-        cb2.setForeground(new java.awt.Color(102, 153, 255));
+        cb2.setForeground(new java.awt.Color(51, 51, 51));
         cb2.setText("Equipe 2");
         cb2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -449,7 +449,7 @@ public class Novojogo extends javax.swing.JFrame {
         jPanel1.add(cb2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 130, -1));
 
         cb11.setBackground(new java.awt.Color(255, 255, 255));
-        cb11.setForeground(new java.awt.Color(102, 153, 255));
+        cb11.setForeground(new java.awt.Color(51, 51, 51));
         cb11.setText("Equipe 11");
         cb11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -459,7 +459,7 @@ public class Novojogo extends javax.swing.JFrame {
         jPanel1.add(cb11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 130, -1));
 
         cb9.setBackground(new java.awt.Color(255, 255, 255));
-        cb9.setForeground(new java.awt.Color(102, 153, 255));
+        cb9.setForeground(new java.awt.Color(51, 51, 51));
         cb9.setText("Equipe 9");
         cb9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -469,7 +469,7 @@ public class Novojogo extends javax.swing.JFrame {
         jPanel1.add(cb9, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, 120, -1));
 
         cb12.setBackground(new java.awt.Color(255, 255, 255));
-        cb12.setForeground(new java.awt.Color(51, 153, 255));
+        cb12.setForeground(new java.awt.Color(51, 51, 51));
         cb12.setText("Equipe 12");
         cb12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -479,7 +479,7 @@ public class Novojogo extends javax.swing.JFrame {
         jPanel1.add(cb12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 120, 20));
 
         cb4.setBackground(new java.awt.Color(255, 255, 255));
-        cb4.setForeground(new java.awt.Color(102, 153, 255));
+        cb4.setForeground(new java.awt.Color(51, 51, 51));
         cb4.setText("Equipe 4");
         cb4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -489,7 +489,7 @@ public class Novojogo extends javax.swing.JFrame {
         jPanel1.add(cb4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 140, -1));
 
         cb6.setBackground(new java.awt.Color(255, 255, 255));
-        cb6.setForeground(new java.awt.Color(102, 153, 255));
+        cb6.setForeground(new java.awt.Color(51, 51, 51));
         cb6.setText("Equipe 6");
         cb6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -499,7 +499,7 @@ public class Novojogo extends javax.swing.JFrame {
         jPanel1.add(cb6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 120, -1));
 
         cb5.setBackground(new java.awt.Color(255, 255, 255));
-        cb5.setForeground(new java.awt.Color(102, 153, 255));
+        cb5.setForeground(new java.awt.Color(51, 51, 51));
         cb5.setText("Equipe 5");
         cb5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -509,7 +509,7 @@ public class Novojogo extends javax.swing.JFrame {
         jPanel1.add(cb5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 130, -1));
 
         cb1.setBackground(new java.awt.Color(255, 255, 255));
-        cb1.setForeground(new java.awt.Color(102, 153, 255));
+        cb1.setForeground(new java.awt.Color(51, 51, 51));
         cb1.setText("Equipe1");
         cb1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -519,7 +519,7 @@ public class Novojogo extends javax.swing.JFrame {
         jPanel1.add(cb1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 140, -1));
 
         cb3.setBackground(new java.awt.Color(255, 255, 255));
-        cb3.setForeground(new java.awt.Color(102, 153, 255));
+        cb3.setForeground(new java.awt.Color(51, 51, 51));
         cb3.setText("Equipe 3");
         cb3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -580,7 +580,7 @@ public class Novojogo extends javax.swing.JFrame {
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 440, 380));
 
-        jPanel2.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         campoNome.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -590,7 +590,7 @@ public class Novojogo extends javax.swing.JFrame {
         imgchefe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chefe-m.png"))); // NOI18N
         jPanel2.add(imgchefe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
-        checkHomem.setBackground(new java.awt.Color(153, 204, 255));
+        checkHomem.setBackground(new java.awt.Color(51, 51, 51));
         checkHomem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkHomem.setForeground(new java.awt.Color(255, 255, 255));
         checkHomem.setSelected(true);
@@ -602,7 +602,7 @@ public class Novojogo extends javax.swing.JFrame {
         });
         jPanel2.add(checkHomem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 90, -1));
 
-        checkMulher.setBackground(new java.awt.Color(153, 204, 255));
+        checkMulher.setBackground(new java.awt.Color(51, 51, 51));
         checkMulher.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkMulher.setForeground(new java.awt.Color(255, 255, 255));
         checkMulher.setText("Mulher");
@@ -615,7 +615,7 @@ public class Novojogo extends javax.swing.JFrame {
 
         btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(153, 204, 255));
+        btnCancelar.setForeground(new java.awt.Color(51, 51, 51));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -626,7 +626,7 @@ public class Novojogo extends javax.swing.JFrame {
 
         btnContinuar.setBackground(new java.awt.Color(255, 255, 255));
         btnContinuar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnContinuar.setForeground(new java.awt.Color(153, 204, 255));
+        btnContinuar.setForeground(new java.awt.Color(51, 51, 51));
         btnContinuar.setText("Continuar");
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

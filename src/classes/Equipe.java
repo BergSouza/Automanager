@@ -21,12 +21,14 @@ import view.Novojogo;
 public class Equipe {    
     public static String baseP(String db, int idequipe, int b, String sav) throws IOException{
         FileReader frp;
-        sav = "temp";
+        //sav = "temp";
+        String bo = null;
+        bo = sav+"/"+db;
         
-        //db/temp \/
+        //"+sav+"/"+db+" \/
         //"+sav+"/"+db+"
         try {
-            frp = new FileReader("C:/automanager/db/temp/equipes/"+idequipe+".amt");
+            frp = new FileReader("C:/automanager/"+bo+"/equipes/"+idequipe+".amt");
             BufferedReader brp = new BufferedReader(frp);
             for (int i = 1; i < b; i++) {
                 brp.readLine();
@@ -45,7 +47,7 @@ public class Equipe {
     }
     
     public static ImageIcon getImagem(String db, int idequipe, String sav){
-        ImageIcon icon = new ImageIcon("c:/automanager/db/temp/equipes/"+idequipe+".png");
+        ImageIcon icon = new ImageIcon("c:/automanager/"+sav+"/"+db+"/equipes/"+idequipe+".png");
         return icon;
     }
     public static int getIdP1(String db, int idequipe, String sav) throws IOException{

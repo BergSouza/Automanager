@@ -49,21 +49,21 @@ public class FuncoesGerais {
             p.mousedrag(p);
         }
     }
-    public static int totalpilotos() throws FileNotFoundException, IOException{
-        FileReader fr = new FileReader("C:/automanager/db/temp/dbinfo.amdi");
+    public static int totalpilotos(String save) throws FileNotFoundException, IOException{
+        FileReader fr = new FileReader("C:/automanager/"+save+"/temp/dbinfo.amdi");
         BufferedReader br = new BufferedReader(fr);
         br.readLine();
         br.readLine();
         return Integer.parseInt(br.readLine());
     }
-    public static int totalequipes() throws FileNotFoundException, IOException{
-        FileReader fr = new FileReader("C:/automanager/db/temp/dbinfo.amdi");
+    public static int totalequipes(String save) throws FileNotFoundException, IOException{
+        FileReader fr = new FileReader("C:/automanager/"+save+"/temp/dbinfo.amdi");
         BufferedReader br = new BufferedReader(fr);
         br.readLine();
         return Integer.parseInt(br.readLine());
     }
-    public static String nomedb() throws FileNotFoundException, IOException{
-        FileReader fr = new FileReader("C:/automanager/db/temp/dbinfo.amdi");
+    public static String nomedb(String save) throws FileNotFoundException, IOException{
+        FileReader fr = new FileReader("C:/automanager/"+save+"/temp/dbinfo.amdi");
         BufferedReader br = new BufferedReader(fr);
         return br.readLine();
     }

@@ -50,7 +50,7 @@ public class FimSemana {
         int p1 = Equipe.getIdP1(db, equipe, save);
         int p2 = Equipe.getIdP2(db, equipe, save);
         
-        FileReader fr = new FileReader("C:/automanager/db/temp/dbinfo.amdi");
+        FileReader fr = new FileReader("C:/automanager/"+save+"/temp/dbinfo.amdi");
         BufferedReader br = new BufferedReader(fr);
         br.readLine();
         br.readLine();
@@ -58,12 +58,11 @@ public class FimSemana {
         //JOptionPane.showMessageDialog(null, a);
         for (int i = 1; i < a+1; i++) {
             if(i == p1){
-                File file = new File("C:/automanager/db/"+db+"/fimdesemana/pneus/"+i+".db");
-                File diretorio = new File("C:/automanager/db/"+db+"/fimdesemana");
-                File diretorio2 = new File("C:/automanager/db/"+db+"/fimdesemana/pneus");
+                File file = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus/"+i+".db");
+                File diretorio = new File("C:/automanager/"+save+"/"+db+"/fimdesemana");
+                File diretorio2 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus");
                 if(diretorio.exists()){
-                    diretorio.mkdir();
-                    diretorio2.mkdir();
+                    
                     FileWriter fw = new FileWriter(file);
                     BufferedWriter bw = new BufferedWriter(fw);
                     bw.write(Integer.toString(quantidade_p11));
@@ -73,6 +72,8 @@ public class FimSemana {
                     bw.write(Integer.toString(quantidade_p31));
                     bw.close();
                 }else{
+                    diretorio.mkdir();
+                    diretorio2.mkdir();
                     
                     FileWriter fw = new FileWriter(file);
                     BufferedWriter bw = new BufferedWriter(fw);
@@ -84,12 +85,11 @@ public class FimSemana {
                     bw.close();
                 }
             }else if(i == p2){
-                File file = new File("C:/automanager/db/"+db+"/fimdesemana/pneus/"+i+".db");
-                File diretorio = new File("C:/automanager/db/"+db+"/fimdesemana/");
-                File diretorio2 = new File("C:/automanager/db/"+db+"/fimdesemana/pneus");
+                File file = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus/"+i+".db");
+                File diretorio = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/");
+                File diretorio2 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus");
                 if(file.exists()){
-                    diretorio.mkdir();
-                    diretorio2.mkdir();
+                    
                     FileWriter fw = new FileWriter(file);
                     BufferedWriter bw = new BufferedWriter(fw);
                     bw.write(Integer.toString(quantidade_p12));
@@ -99,6 +99,9 @@ public class FimSemana {
                     bw.write(Integer.toString(quantidade_p32));
                     bw.close();
                 }else{
+                    diretorio.mkdir();
+                    diretorio2.mkdir();
+                    
                     FileWriter fw = new FileWriter(file);
                     BufferedWriter bw = new BufferedWriter(fw);
                     bw.write(Integer.toString(quantidade_p21));
@@ -109,9 +112,9 @@ public class FimSemana {
                     bw.close();
                 }
             }else{
-                File diretorio = new File("C:/automanager/db/"+db+"/fimdesemana");
-                File diretorio2 = new File("C:/automanager/db/"+db+"/fimdesemana/pneus");
-                File file = new File("C:/automanager/db/"+db+"/fimdesemana/pneus/"+i+".db");
+                File diretorio = new File("C:/automanager/"+save+"/"+db+"/fimdesemana");
+                File diretorio2 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus");
+                File file = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus/"+i+".db");
                 if(file.exists()){
                     
                     guardaPneus(file);
@@ -123,14 +126,14 @@ public class FimSemana {
             }
         }
         FDSTelaPneus tela = new FDSTelaPneus();
-        tela.recebedados(db, equipe, idcorrida);
+        tela.recebedados(db, equipe, idcorrida, save);
         tela.mousedrag(tela);
         tela.setVisible(true);
         tela.setLocationRelativeTo(null);
     }
-    public static int pegapneusfimsemana(int idpiloto, int pneu) throws FileNotFoundException, IOException{
+    public static int pegapneusfimsemana(int idpiloto, int pneu, String save) throws FileNotFoundException, IOException{
         
-            FileReader frr = new FileReader("C:/automanager/db/temp/fimdesemana/pneus/"+idpiloto+".db");
+            FileReader frr = new FileReader("C:/automanager/"+save+"/temp/fimdesemana/pneus/"+idpiloto+".db");
             BufferedReader brr = new BufferedReader(frr);
             for (int i = 0; i < pneu-1; i++) {
             brr.readLine();

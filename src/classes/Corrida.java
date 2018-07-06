@@ -19,10 +19,10 @@ import javax.swing.ImageIcon;
  */
 public class Corrida {
     public static String baseP(String db, String numerocorrida, int linha, String sav) throws IOException{
-        //db/tempo \/
+        //"+sav+"/"+db+"o \/
         //"+sav+"/"+db+"
         try {
-            FileReader fr = new FileReader("C:/automanager/db/temp/corridas/"+numerocorrida+".amc");
+            FileReader fr = new FileReader("C:/automanager/"+sav+"/"+db+"/corridas/"+numerocorrida+".amc");
             BufferedReader br = new BufferedReader(fr);
             for (int i = 0; i < linha-1; i++) {
                 br.readLine();
@@ -34,7 +34,7 @@ public class Corrida {
         }
     }
     public static ImageIcon getBandeira(String db, String numerocorrida, String sav){
-        ImageIcon icon = new ImageIcon("C:/automanager/db/temp/corridas/"+numerocorrida+".png");
+        ImageIcon icon = new ImageIcon("C:/automanager/"+sav+"/"+db+"/corridas/"+numerocorrida+".png");
         return icon;
     }
     public static String getPais(String db, String numerocorrida, String sav){
@@ -103,7 +103,7 @@ public class Corrida {
     }
     public static String getTotalCorridas(String db, String sav) throws IOException{
         try {
-            FileReader fr = new FileReader("C:/automanager/db/temp/corridas/cinfo.amdb");
+            FileReader fr = new FileReader("C:/automanager/"+sav+"/"+db+"/corridas/cinfo.amdb");
             BufferedReader br = new BufferedReader(fr);
             return br.readLine();
         } catch (FileNotFoundException ex) {

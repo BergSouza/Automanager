@@ -30,6 +30,7 @@ public class FDSTelaPneus extends javax.swing.JFrame {
     private static int numtotalpilotos = 0;
     private static int pagina = 1;
     private static String dbb = null;
+    private static String savee = null;
     
     public void mousedrag(JFrame fram){
         frame = fram;
@@ -45,20 +46,21 @@ public class FDSTelaPneus extends javax.swing.JFrame {
         initComponents();
     }
     
-    public void recebedados(String db, int idequipe, String idcorrida) throws IOException{
-        int idp1 = Equipe.getIdP1(db, idequipe, "saves");
-        int idp2 = Equipe.getIdP2(db, idequipe, "saves");
+    public void recebedados(String db, int idequipe, String idcorrida, String save) throws IOException{
+        savee = save;
+        int idp1 = Equipe.getIdP1(db, idequipe, savee);
+        int idp2 = Equipe.getIdP2(db, idequipe, savee);
         dbb = db;
         
-        int pneu1 = Integer.parseInt(Corrida.getPneu1(db, idcorrida, "saves"));
-        int pneu2 = Integer.parseInt(Corrida.getPneu2(db, idcorrida, "saves"));
-        int pneu3 = Integer.parseInt(Corrida.getPneu3(db, idcorrida, "saves"));
-        imgpneu1.setIcon(Pneu.getImagem(db, pneu1));
-        imgpneu2.setIcon(Pneu.getImagem(db, pneu2));
-        imgpneu3.setIcon(Pneu.getImagem(db, pneu3));
-        txtpneu1.setText(Pneu.getNome(db, pneu1));
-        txtpneu2.setText(Pneu.getNome(db, pneu2));
-        txtpneu3.setText(Pneu.getNome(db, pneu3));
+        int pneu1 = Integer.parseInt(Corrida.getPneu1(db, idcorrida, savee));
+        int pneu2 = Integer.parseInt(Corrida.getPneu2(db, idcorrida, savee));
+        int pneu3 = Integer.parseInt(Corrida.getPneu3(db, idcorrida, savee));
+        imgpneu1.setIcon(Pneu.getImagem(db, pneu1, savee));
+        imgpneu2.setIcon(Pneu.getImagem(db, pneu2, savee));
+        imgpneu3.setIcon(Pneu.getImagem(db, pneu3, savee));
+        txtpneu1.setText(Pneu.getNome(db, pneu1, savee));
+        txtpneu2.setText(Pneu.getNome(db, pneu2, savee));
+        txtpneu3.setText(Pneu.getNome(db, pneu3, savee));
         
         setapilotos(db);
         setacores(db,idequipe);
@@ -136,7 +138,7 @@ public class FDSTelaPneus extends javax.swing.JFrame {
     
     public void setatotal() throws IOException{
         setavisivel();
-        int totalpilotos = FuncoesGerais.totalpilotos();
+        int totalpilotos = FuncoesGerais.totalpilotos(savee);
         if(pagina == 2){
             if (totalpilotos < 22) {
                 txtp11.setVisible(false);
@@ -300,7 +302,7 @@ public class FDSTelaPneus extends javax.swing.JFrame {
     }
     
     public void setacores(String db,int idequipe) throws IOException{
-        String cor = Equipe.getCor1(db, idequipe, "saves");
+        String cor = Equipe.getCor1(db, idequipe, savee);
         jPanel2.setBackground(Color.decode(cor));
         jLabel5.setForeground(Color.decode(cor));
         jLabel6.setForeground(Color.decode(cor));
@@ -371,37 +373,37 @@ public class FDSTelaPneus extends javax.swing.JFrame {
     
     public void setapilotos(String db) throws IOException{
         if (numtotalpilotos < 1) {
-            txtp1.setText(Piloto.getLetraNome(db, 1, "saves")+Piloto.getSobrenome(db, 1, "saves"));
+            txtp1.setText(Piloto.getLetraNome(db, 1, savee)+Piloto.getSobrenome(db, 1, savee));
         }
         if (numtotalpilotos < 2){
-            txtp2.setText(Piloto.getLetraNome(db, 2, "saves")+Piloto.getSobrenome(db, 2, "saves"));
+            txtp2.setText(Piloto.getLetraNome(db, 2, savee)+Piloto.getSobrenome(db, 2, savee));
         }
         if (numtotalpilotos < 3) {
-            txtp3.setText(Piloto.getLetraNome(db, 3, "saves")+Piloto.getSobrenome(db, 3, "saves"));
+            txtp3.setText(Piloto.getLetraNome(db, 3, savee)+Piloto.getSobrenome(db, 3, savee));
         }
         if (numtotalpilotos < 4){
-            txtp4.setText(Piloto.getLetraNome(db, 4, "saves")+Piloto.getSobrenome(db, 4, "saves"));
+            txtp4.setText(Piloto.getLetraNome(db, 4, savee)+Piloto.getSobrenome(db, 4, savee));
         }
         if (numtotalpilotos < 5) {
-            txtp5.setText(Piloto.getLetraNome(db, 5, "saves")+Piloto.getSobrenome(db, 5, "saves"));
+            txtp5.setText(Piloto.getLetraNome(db, 5, savee)+Piloto.getSobrenome(db, 5, savee));
         }
         if (numtotalpilotos < 6){
-            txtp6.setText(Piloto.getLetraNome(db, 6, "saves")+Piloto.getSobrenome(db, 6, "saves"));
+            txtp6.setText(Piloto.getLetraNome(db, 6, savee)+Piloto.getSobrenome(db, 6, savee));
         }
         if (numtotalpilotos < 7) {
-            txtp7.setText(Piloto.getLetraNome(db, 7, "saves")+Piloto.getSobrenome(db, 7, "saves"));
+            txtp7.setText(Piloto.getLetraNome(db, 7, savee)+Piloto.getSobrenome(db, 7, savee));
         }
         if (numtotalpilotos < 8){
-            txtp8.setText(Piloto.getLetraNome(db, 8, "saves")+Piloto.getSobrenome(db, 8, "saves"));
+            txtp8.setText(Piloto.getLetraNome(db, 8, savee)+Piloto.getSobrenome(db, 8, savee));
         }
         if (numtotalpilotos < 9) {
-            txtp9.setText(Piloto.getLetraNome(db, 9, "saves")+Piloto.getSobrenome(db, 9, "saves"));
+            txtp9.setText(Piloto.getLetraNome(db, 9, savee)+Piloto.getSobrenome(db, 9, savee));
         }
         if (numtotalpilotos < 10){
-            txtp10.setText(Piloto.getLetraNome(db, 10, "saves")+Piloto.getSobrenome(db, 10, "saves"));
+            txtp10.setText(Piloto.getLetraNome(db, 10, savee)+Piloto.getSobrenome(db, 10, savee));
         }
         if (numtotalpilotos < 11) {
-            txtp11.setText(Piloto.getLetraNome(db, 11, "saves")+Piloto.getSobrenome(db, 11, "saves"));
+            txtp11.setText(Piloto.getLetraNome(db, 11, savee)+Piloto.getSobrenome(db, 11, savee));
         }
         setapneus();
         setatotal();
@@ -412,41 +414,41 @@ public class FDSTelaPneus extends javax.swing.JFrame {
     
     public void setapilotos2(String db) throws IOException{
         if (numtotalpilotos < 12) {
-            txtp1.setText(Piloto.getLetraNome(db, 12, "saves")+Piloto.getSobrenome(db, 12, "saves"));
+            txtp1.setText(Piloto.getLetraNome(db, 12, savee)+Piloto.getSobrenome(db, 12, savee));
         }
         if (numtotalpilotos < 13) {
-            txtp2.setText(Piloto.getLetraNome(db, 13, "saves")+Piloto.getSobrenome(db, 13, "saves"));
+            txtp2.setText(Piloto.getLetraNome(db, 13, savee)+Piloto.getSobrenome(db, 13, savee));
         }
         if (numtotalpilotos < 14){
-            txtp3.setText(Piloto.getLetraNome(db, 14, "saves")+Piloto.getSobrenome(db, 14, "saves"));
+            txtp3.setText(Piloto.getLetraNome(db, 14, savee)+Piloto.getSobrenome(db, 14, savee));
         }
         if (numtotalpilotos < 15) {
-            txtp4.setText(Piloto.getLetraNome(db, 15, "saves")+Piloto.getSobrenome(db, 15, "saves"));
+            txtp4.setText(Piloto.getLetraNome(db, 15, savee)+Piloto.getSobrenome(db, 15, savee));
         }
         if (numtotalpilotos < 16){
-            txtp5.setText(Piloto.getLetraNome(db, 16, "saves")+Piloto.getSobrenome(db, 16, "saves"));
+            txtp5.setText(Piloto.getLetraNome(db, 16, savee)+Piloto.getSobrenome(db, 16, savee));
         }
         if (numtotalpilotos < 17) {
-            txtp6.setText(Piloto.getLetraNome(db, 17, "saves")+Piloto.getSobrenome(db, 17, "saves"));
+            txtp6.setText(Piloto.getLetraNome(db, 17, savee)+Piloto.getSobrenome(db, 17, savee));
         }
         if (numtotalpilotos < 18){
-            txtp7.setText(Piloto.getLetraNome(db, 18, "saves")+Piloto.getSobrenome(db, 18, "saves"));
+            txtp7.setText(Piloto.getLetraNome(db, 18, savee)+Piloto.getSobrenome(db, 18, savee));
         }
         if (numtotalpilotos < 19) {
-            txtp8.setText(Piloto.getLetraNome(db, 19, "saves")+Piloto.getSobrenome(db, 19, "saves"));
+            txtp8.setText(Piloto.getLetraNome(db, 19, savee)+Piloto.getSobrenome(db, 19, savee));
         }
         if (numtotalpilotos < 20){
-            txtp9.setText(Piloto.getLetraNome(db, 20, "saves")+Piloto.getSobrenome(db, 20, "saves"));
+            txtp9.setText(Piloto.getLetraNome(db, 20, savee)+Piloto.getSobrenome(db, 20, savee));
         }
         if (numtotalpilotos < 21) {
             try {
-                txtp10.setText(Piloto.getLetraNome(db, 21, "saves")+Piloto.getSobrenome(db, 21, "saves"));
+                txtp10.setText(Piloto.getLetraNome(db, 21, savee)+Piloto.getSobrenome(db, 21, savee));
             } catch (Exception e) {
             }
         }
         if (numtotalpilotos < 22){
             try {
-                txtp11.setText(Piloto.getLetraNome(db, 22, "saves")+Piloto.getSobrenome(db, 22, "saves"));
+                txtp11.setText(Piloto.getLetraNome(db, 22, savee)+Piloto.getSobrenome(db, 22, savee));
             } catch (Exception e) {
             }
             
@@ -461,121 +463,121 @@ public class FDSTelaPneus extends javax.swing.JFrame {
     
     public void setapneus() throws IOException {
         if(numtotalpilotos < 2){
-            txtpn11.setText(Integer.toString(FimSemana.pegapneusfimsemana(1 , 1)));
-            txtpn21.setText(Integer.toString(FimSemana.pegapneusfimsemana(1 , 2)));
-            txtpn31.setText(Integer.toString(FimSemana.pegapneusfimsemana(1 , 3)));
+            txtpn11.setText(Integer.toString(FimSemana.pegapneusfimsemana(1 , 1, savee)));
+            txtpn21.setText(Integer.toString(FimSemana.pegapneusfimsemana(1 , 2, savee)));
+            txtpn31.setText(Integer.toString(FimSemana.pegapneusfimsemana(1 , 3, savee)));
         }
         if(numtotalpilotos < 3){
-        txtpn12.setText(Integer.toString(FimSemana.pegapneusfimsemana(2 , 1)));
-        txtpn22.setText(Integer.toString(FimSemana.pegapneusfimsemana(2 , 2)));
-        txtpn32.setText(Integer.toString(FimSemana.pegapneusfimsemana(2 , 3)));
+        txtpn12.setText(Integer.toString(FimSemana.pegapneusfimsemana(2 , 1, savee)));
+        txtpn22.setText(Integer.toString(FimSemana.pegapneusfimsemana(2 , 2, savee)));
+        txtpn32.setText(Integer.toString(FimSemana.pegapneusfimsemana(2 , 3, savee)));
         }
         if(numtotalpilotos < 4){
-        txtpn13.setText(Integer.toString(FimSemana.pegapneusfimsemana(3 , 1)));
-        txtpn23.setText(Integer.toString(FimSemana.pegapneusfimsemana(3 , 2)));
-        txtpn33.setText(Integer.toString(FimSemana.pegapneusfimsemana(3 , 3)));
+        txtpn13.setText(Integer.toString(FimSemana.pegapneusfimsemana(3 , 1, savee)));
+        txtpn23.setText(Integer.toString(FimSemana.pegapneusfimsemana(3 , 2, savee)));
+        txtpn33.setText(Integer.toString(FimSemana.pegapneusfimsemana(3 , 3, savee)));
         }
         if(numtotalpilotos < 5){
-        txtpn14.setText(Integer.toString(FimSemana.pegapneusfimsemana(4 , 1)));
-        txtpn24.setText(Integer.toString(FimSemana.pegapneusfimsemana(4 , 2)));
-        txtpn34.setText(Integer.toString(FimSemana.pegapneusfimsemana(4 , 3)));
+        txtpn14.setText(Integer.toString(FimSemana.pegapneusfimsemana(4 , 1, savee)));
+        txtpn24.setText(Integer.toString(FimSemana.pegapneusfimsemana(4 , 2, savee)));
+        txtpn34.setText(Integer.toString(FimSemana.pegapneusfimsemana(4 , 3, savee)));
         }
         if(numtotalpilotos < 6){
-        txtpn15.setText(Integer.toString(FimSemana.pegapneusfimsemana(5 , 1)));
-        txtpn25.setText(Integer.toString(FimSemana.pegapneusfimsemana(5 , 2)));
-        txtpn35.setText(Integer.toString(FimSemana.pegapneusfimsemana(5 , 3)));
+        txtpn15.setText(Integer.toString(FimSemana.pegapneusfimsemana(5 , 1, savee)));
+        txtpn25.setText(Integer.toString(FimSemana.pegapneusfimsemana(5 , 2, savee)));
+        txtpn35.setText(Integer.toString(FimSemana.pegapneusfimsemana(5 , 3, savee)));
         }
         if(numtotalpilotos < 7){
-        txtpn16.setText(Integer.toString(FimSemana.pegapneusfimsemana(6 , 1)));
-        txtpn26.setText(Integer.toString(FimSemana.pegapneusfimsemana(6 , 2)));
-        txtpn36.setText(Integer.toString(FimSemana.pegapneusfimsemana(6 , 3)));
+        txtpn16.setText(Integer.toString(FimSemana.pegapneusfimsemana(6 , 1, savee)));
+        txtpn26.setText(Integer.toString(FimSemana.pegapneusfimsemana(6 , 2, savee)));
+        txtpn36.setText(Integer.toString(FimSemana.pegapneusfimsemana(6 , 3, savee)));
         }
         if(numtotalpilotos < 8){
-        txtpn17.setText(Integer.toString(FimSemana.pegapneusfimsemana(7 , 1)));
-        txtpn27.setText(Integer.toString(FimSemana.pegapneusfimsemana(7 , 2)));
-        txtpn37.setText(Integer.toString(FimSemana.pegapneusfimsemana(7 , 3)));
+        txtpn17.setText(Integer.toString(FimSemana.pegapneusfimsemana(7 , 1, savee)));
+        txtpn27.setText(Integer.toString(FimSemana.pegapneusfimsemana(7 , 2, savee)));
+        txtpn37.setText(Integer.toString(FimSemana.pegapneusfimsemana(7 , 3, savee)));
         }
         if(numtotalpilotos < 9){
-        txtpn18.setText(Integer.toString(FimSemana.pegapneusfimsemana(8 , 1)));
-        txtpn28.setText(Integer.toString(FimSemana.pegapneusfimsemana(8 , 2)));
-        txtpn38.setText(Integer.toString(FimSemana.pegapneusfimsemana(8 , 3)));
+        txtpn18.setText(Integer.toString(FimSemana.pegapneusfimsemana(8 , 1, savee)));
+        txtpn28.setText(Integer.toString(FimSemana.pegapneusfimsemana(8 , 2, savee)));
+        txtpn38.setText(Integer.toString(FimSemana.pegapneusfimsemana(8 , 3, savee)));
         }
         if(numtotalpilotos < 10){
-        txtpn19.setText(Integer.toString(FimSemana.pegapneusfimsemana(9 , 1)));
-        txtpn29.setText(Integer.toString(FimSemana.pegapneusfimsemana(9 , 2)));
-        txtpn39.setText(Integer.toString(FimSemana.pegapneusfimsemana(9 , 3)));
+        txtpn19.setText(Integer.toString(FimSemana.pegapneusfimsemana(9 , 1, savee)));
+        txtpn29.setText(Integer.toString(FimSemana.pegapneusfimsemana(9 , 2, savee)));
+        txtpn39.setText(Integer.toString(FimSemana.pegapneusfimsemana(9 , 3, savee)));
         }
         if(numtotalpilotos < 11){
-        txtpn110.setText(Integer.toString(FimSemana.pegapneusfimsemana(10 , 1)));
-        txtpn210.setText(Integer.toString(FimSemana.pegapneusfimsemana(10 , 2)));
-        txtpn310.setText(Integer.toString(FimSemana.pegapneusfimsemana(10 , 3)));
+        txtpn110.setText(Integer.toString(FimSemana.pegapneusfimsemana(10 , 1, savee)));
+        txtpn210.setText(Integer.toString(FimSemana.pegapneusfimsemana(10 , 2, savee)));
+        txtpn310.setText(Integer.toString(FimSemana.pegapneusfimsemana(10 , 3, savee)));
         }
         if(numtotalpilotos < 12){
-        txtpn111.setText(Integer.toString(FimSemana.pegapneusfimsemana(11 , 1)));
-        txtpn211.setText(Integer.toString(FimSemana.pegapneusfimsemana(11 , 2)));
-        txtpn311.setText(Integer.toString(FimSemana.pegapneusfimsemana(11 , 3)));
+        txtpn111.setText(Integer.toString(FimSemana.pegapneusfimsemana(11 , 1, savee)));
+        txtpn211.setText(Integer.toString(FimSemana.pegapneusfimsemana(11 , 2, savee)));
+        txtpn311.setText(Integer.toString(FimSemana.pegapneusfimsemana(11 , 3, savee)));
         }
     }
     public void setapneus2() throws IOException{
         if(numtotalpilotos < 13){
-        txtpn11.setText(Integer.toString(FimSemana.pegapneusfimsemana(12 , 1)));
-        txtpn21.setText(Integer.toString(FimSemana.pegapneusfimsemana(12 , 2)));
-        txtpn31.setText(Integer.toString(FimSemana.pegapneusfimsemana(12 , 3)));
+        txtpn11.setText(Integer.toString(FimSemana.pegapneusfimsemana(12 , 1, savee)));
+        txtpn21.setText(Integer.toString(FimSemana.pegapneusfimsemana(12 , 2, savee)));
+        txtpn31.setText(Integer.toString(FimSemana.pegapneusfimsemana(12 , 3, savee)));
         }
         if(numtotalpilotos < 14){
-        txtpn12.setText(Integer.toString(FimSemana.pegapneusfimsemana(13 , 1)));
-        txtpn22.setText(Integer.toString(FimSemana.pegapneusfimsemana(13 , 2)));
-        txtpn32.setText(Integer.toString(FimSemana.pegapneusfimsemana(13 , 3)));
+        txtpn12.setText(Integer.toString(FimSemana.pegapneusfimsemana(13 , 1, savee)));
+        txtpn22.setText(Integer.toString(FimSemana.pegapneusfimsemana(13 , 2, savee)));
+        txtpn32.setText(Integer.toString(FimSemana.pegapneusfimsemana(13 , 3, savee)));
         }
         if(numtotalpilotos < 15){
-        txtpn13.setText(Integer.toString(FimSemana.pegapneusfimsemana(14 , 1)));
-        txtpn23.setText(Integer.toString(FimSemana.pegapneusfimsemana(14 , 2)));
-        txtpn33.setText(Integer.toString(FimSemana.pegapneusfimsemana(14 , 3)));
+        txtpn13.setText(Integer.toString(FimSemana.pegapneusfimsemana(14 , 1, savee)));
+        txtpn23.setText(Integer.toString(FimSemana.pegapneusfimsemana(14 , 2, savee)));
+        txtpn33.setText(Integer.toString(FimSemana.pegapneusfimsemana(14 , 3, savee)));
         }
         if(numtotalpilotos < 16){
-        txtpn14.setText(Integer.toString(FimSemana.pegapneusfimsemana(15 , 1)));
-        txtpn24.setText(Integer.toString(FimSemana.pegapneusfimsemana(15 , 2)));
-        txtpn34.setText(Integer.toString(FimSemana.pegapneusfimsemana(15 , 3)));
+        txtpn14.setText(Integer.toString(FimSemana.pegapneusfimsemana(15 , 1, savee)));
+        txtpn24.setText(Integer.toString(FimSemana.pegapneusfimsemana(15 , 2, savee)));
+        txtpn34.setText(Integer.toString(FimSemana.pegapneusfimsemana(15 , 3, savee)));
         }
         if(numtotalpilotos < 17){
-        txtpn15.setText(Integer.toString(FimSemana.pegapneusfimsemana(16 , 1)));
-        txtpn25.setText(Integer.toString(FimSemana.pegapneusfimsemana(16 , 2)));
-        txtpn35.setText(Integer.toString(FimSemana.pegapneusfimsemana(16 , 3)));
+        txtpn15.setText(Integer.toString(FimSemana.pegapneusfimsemana(16 , 1, savee)));
+        txtpn25.setText(Integer.toString(FimSemana.pegapneusfimsemana(16 , 2, savee)));
+        txtpn35.setText(Integer.toString(FimSemana.pegapneusfimsemana(16 , 3, savee)));
         }
         if(numtotalpilotos < 18){
-        txtpn16.setText(Integer.toString(FimSemana.pegapneusfimsemana(17 , 1)));
-        txtpn26.setText(Integer.toString(FimSemana.pegapneusfimsemana(17 , 2)));
-        txtpn36.setText(Integer.toString(FimSemana.pegapneusfimsemana(17 , 3)));
+        txtpn16.setText(Integer.toString(FimSemana.pegapneusfimsemana(17 , 1, savee)));
+        txtpn26.setText(Integer.toString(FimSemana.pegapneusfimsemana(17 , 2, savee)));
+        txtpn36.setText(Integer.toString(FimSemana.pegapneusfimsemana(17 , 3, savee)));
         }
         if(numtotalpilotos < 19){
-        txtpn17.setText(Integer.toString(FimSemana.pegapneusfimsemana(18 , 1)));
-        txtpn27.setText(Integer.toString(FimSemana.pegapneusfimsemana(18 , 2)));
-        txtpn37.setText(Integer.toString(FimSemana.pegapneusfimsemana(18 , 3)));
+        txtpn17.setText(Integer.toString(FimSemana.pegapneusfimsemana(18 , 1, savee)));
+        txtpn27.setText(Integer.toString(FimSemana.pegapneusfimsemana(18 , 2, savee)));
+        txtpn37.setText(Integer.toString(FimSemana.pegapneusfimsemana(18 , 3, savee)));
         }
         if(numtotalpilotos < 20){
-        txtpn18.setText(Integer.toString(FimSemana.pegapneusfimsemana(19 , 1)));
-        txtpn28.setText(Integer.toString(FimSemana.pegapneusfimsemana(19 , 2)));
-        txtpn38.setText(Integer.toString(FimSemana.pegapneusfimsemana(19 , 3)));
+        txtpn18.setText(Integer.toString(FimSemana.pegapneusfimsemana(19 , 1, savee)));
+        txtpn28.setText(Integer.toString(FimSemana.pegapneusfimsemana(19 , 2, savee)));
+        txtpn38.setText(Integer.toString(FimSemana.pegapneusfimsemana(19 , 3, savee)));
         }
         if(numtotalpilotos < 21){
-        txtpn19.setText(Integer.toString(FimSemana.pegapneusfimsemana(20 , 1)));
-        txtpn29.setText(Integer.toString(FimSemana.pegapneusfimsemana(20 , 2)));
-        txtpn39.setText(Integer.toString(FimSemana.pegapneusfimsemana(20 , 3)));
+        txtpn19.setText(Integer.toString(FimSemana.pegapneusfimsemana(20 , 1, savee)));
+        txtpn29.setText(Integer.toString(FimSemana.pegapneusfimsemana(20 , 2, savee)));
+        txtpn39.setText(Integer.toString(FimSemana.pegapneusfimsemana(20 , 3, savee)));
         }
         if(numtotalpilotos < 22){
             try {
-                txtpn110.setText(Integer.toString(FimSemana.pegapneusfimsemana(21 , 1)));
-                txtpn210.setText(Integer.toString(FimSemana.pegapneusfimsemana(21 , 2)));
-                txtpn310.setText(Integer.toString(FimSemana.pegapneusfimsemana(21 , 3)));
+                txtpn110.setText(Integer.toString(FimSemana.pegapneusfimsemana(21 , 1, savee)));
+                txtpn210.setText(Integer.toString(FimSemana.pegapneusfimsemana(21 , 2, savee)));
+                txtpn310.setText(Integer.toString(FimSemana.pegapneusfimsemana(21 , 3, savee)));
             } catch (Exception e) {
             }
         
         }
         if(numtotalpilotos < 23){
             try {
-                txtpn111.setText(Integer.toString(FimSemana.pegapneusfimsemana(22 , 1)));
-                txtpn211.setText(Integer.toString(FimSemana.pegapneusfimsemana(22 , 2)));
-                txtpn311.setText(Integer.toString(FimSemana.pegapneusfimsemana(22 , 3)));
+                txtpn111.setText(Integer.toString(FimSemana.pegapneusfimsemana(22 , 1, savee)));
+                txtpn211.setText(Integer.toString(FimSemana.pegapneusfimsemana(22 , 2, savee)));
+                txtpn311.setText(Integer.toString(FimSemana.pegapneusfimsemana(22 , 3, savee)));
             } catch (Exception e) {
             }
         
