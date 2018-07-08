@@ -45,6 +45,16 @@ public class Equipe {
         d = "R$: "+d;
         return d;
     }
+    public static String getNome(String db, int idequipe, String sav) throws IOException{
+        String d = baseP(db, idequipe, 1,sav);
+        return d;
+    }
+    public static int getID(String db,String save) throws FileNotFoundException, IOException{
+        FileReader fr = new FileReader("C:/automanager/"+save+"/"+db+"/save.ams");
+        BufferedReader br = new BufferedReader(fr);
+        int idequipe = Integer.parseInt(br.readLine());
+        return idequipe;
+    }
     
     public static ImageIcon getImagem(String db, int idequipe, String sav){
         ImageIcon icon = new ImageIcon("c:/automanager/"+sav+"/"+db+"/equipes/"+idequipe+".png");

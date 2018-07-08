@@ -38,4 +38,8 @@ public class Pneu {
         ImageIcon ico = new ImageIcon("c:/automanager/"+sav+"/"+db+"/pneus/"+idpneu+".png");
         return ico;
     }
+    public static ImageIcon getImagem3(String db, int idpneu, String sav) throws IOException{
+        ImageIcon ico = new ImageIcon("c:/automanager/"+sav+"/"+db+"/pneus/"+idpneu+"_3.png");
+        return ico;
+    }
 }

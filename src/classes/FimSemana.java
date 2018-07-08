@@ -12,6 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import view.FDSTelaPneus;
 
@@ -46,6 +48,98 @@ public class FimSemana {
         bw.close();
     }
     
+    public void guardaRelacao(String db , String save,String idcorrida, int idpiloto) throws IOException{
+        try {
+            FileReader fr = new FileReader("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus/"+idpiloto+".db");
+            BufferedReader br = new BufferedReader(fr);
+            FileWriter fw = new FileWriter("C:/automanager/"+save+"/"+db+"/fimdesemana/relacaopneus/"+idpiloto+".db");
+            BufferedWriter bw = new BufferedWriter(fw);
+            int a = Integer.parseInt(br.readLine());
+            for (int i = 0; i < a; i++) {
+                bw.write(Corrida.getPneu1(db, idcorrida, save));
+                bw.newLine();
+            }
+            int b = Integer.parseInt(br.readLine());
+            for (int i = 0; i < b; i++) {
+                bw.write(Corrida.getPneu2(db, idcorrida, save));
+                bw.newLine();
+            }
+            int c = Integer.parseInt(br.readLine());
+            for (int i = 0; i < c; i++) {
+                bw.write(Corrida.getPneu3(db, idcorrida, save));
+                bw.newLine();
+            }
+            bw.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FimSemana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static String retornaRelacao(String save,int idpiloto, int numpneusequencia) throws IOException{
+        try {
+            FileReader fr = new FileReader("C:/automanager/"+save+"/temp/fimdesemana/relacaopneus/"+idpiloto+".db");
+            BufferedReader br = new BufferedReader(fr);
+            for (int i = 0; i < numpneusequencia-1; i++) {
+                br.readLine();
+            }
+            return br.readLine();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FimSemana.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public void guardaDesgaste(String db , String save,String idcorrida, int idpiloto, int desgaste) throws IOException{
+        try {
+            FileReader fr = new FileReader("C:/automanager/"+save+"/"+db+"/fimdesemana/relacaopneus/"+idpiloto+".db");
+            BufferedReader br = new BufferedReader(fr);
+            FileWriter fw = new FileWriter("C:/automanager/"+save+"/"+db+"/fimdesemana/desgastepneus/"+idpiloto+".db");
+            BufferedWriter bw = new BufferedWriter(fw);
+            int a = (int) br.lines().count();
+            for (int i = 0; i < a; i++) {
+                bw.write(Integer.toString(desgaste));
+                bw.newLine();
+            }
+            bw.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FimSemana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static String retornaDesgaste(String save,int idpiloto, int numpneusequencia) throws IOException{
+        try {
+            FileReader fr = new FileReader("C:/automanager/"+save+"/temp/fimdesemana/desgastepneus/"+idpiloto+".db");
+            BufferedReader br = new BufferedReader(fr);
+            for (int i = 0; i < numpneusequencia-1; i++) {
+                br.readLine();
+            }
+            return br.readLine();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FimSemana.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public void escolhePneu(String save, int idpiloto, int numpneusequencia) throws IOException{
+        File file = new File("C:/automanager/"+save+"/temp/fimdesemana/escolhapneus");
+        if(file.exists()){
+            
+        }else{
+            file.mkdir();
+        }
+        FileWriter fw = new FileWriter(file+"/"+idpiloto+".db");
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(Integer.toString(numpneusequencia));
+        bw.close();
+    }
+    
+    public static int retornapneuescolhido(String save, int idpiloto) throws FileNotFoundException, IOException{
+        File file = new File("C:/automanager/"+save+"/temp/fimdesemana/escolhapneus/"+idpiloto+".db");
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+        return Integer.parseInt(br.readLine());
+    }
+    
     public void salvaPneus(String db,int equipe,String save,int quantidade_p11,int quantidade_p21,int quantidade_p31,int quantidade_p12,int quantidade_p22,int quantidade_p32, String idcorrida) throws IOException{
         int p1 = Equipe.getIdP1(db, equipe, save);
         int p2 = Equipe.getIdP2(db, equipe, save);
@@ -59,8 +153,12 @@ public class FimSemana {
         for (int i = 1; i < a+1; i++) {
             if(i == p1){
                 File file = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus/"+i+".db");
+                File file2 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/relacaopneus/"+i+".db");
+                File file3 = new File("C:/automanager/"+save+"/"+db+"fimdesemana/desgastepneus/"+i+".db");
                 File diretorio = new File("C:/automanager/"+save+"/"+db+"/fimdesemana");
                 File diretorio2 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus");
+                File diretorio3 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/relacaopneus");
+                File diretorio4 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/desgastepneus");
                 if(diretorio.exists()){
                     
                     FileWriter fw = new FileWriter(file);
@@ -74,6 +172,7 @@ public class FimSemana {
                 }else{
                     diretorio.mkdir();
                     diretorio2.mkdir();
+                    diretorio3.mkdir();
                     
                     FileWriter fw = new FileWriter(file);
                     BufferedWriter bw = new BufferedWriter(fw);
@@ -83,11 +182,26 @@ public class FimSemana {
                     bw.newLine();
                     bw.write(Integer.toString(quantidade_p31));
                     bw.close();
+                    
+                }
+                if(diretorio3.exists()){
+                    
+                }else{
+                    diretorio3.mkdir();
+                }
+                if(file3.exists()){
+                    
+                }else{
+                    diretorio4.mkdir();
                 }
             }else if(i == p2){
                 File file = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus/"+i+".db");
+                File file2 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/relacaopneus/"+i+".db");
+                File file3 = new File("C:/automanager/"+save+"/"+db+"fimdesemana/desgastepneus/"+i+".db");
                 File diretorio = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/");
                 File diretorio2 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus");
+                File diretorio3 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/relacaopneus");
+                File diretorio4 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/desgastepneus");
                 if(file.exists()){
                     
                     FileWriter fw = new FileWriter(file);
@@ -110,20 +224,47 @@ public class FimSemana {
                     bw.newLine();
                     bw.write(Integer.toString(quantidade_p32));
                     bw.close();
+                    
+                }if(file2.exists()){
+                    
+                }else{
+                    diretorio3.mkdir();
+                }
+                if(file3.exists()){
+                    
+                }else{
+                    diretorio4.mkdir();
                 }
             }else{
                 File diretorio = new File("C:/automanager/"+save+"/"+db+"/fimdesemana");
                 File diretorio2 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus");
+                File diretorio3 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/relacaopneus");
+                File diretorio4 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/desgastepneus");
                 File file = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus/"+i+".db");
+                File file2 = new File("C:/automanager/"+save+"/"+db+"/fimdesemana/relacaopneus/"+i+".db");
+                File file3 = new File("C:/automanager/"+save+"/"+db+"fimdesemana/desgastepneus/"+i+".db");
                 if(file.exists()){
                     
-                    guardaPneus(file);
                 }else{
                     diretorio.mkdir();
                     diretorio2.mkdir();
-                    guardaPneus(file);
                 }
+                if(file2.exists()){
+                    
+                }else{
+                    diretorio3.mkdir();
+                }
+                if(file3.exists()){
+                    
+                }else{
+                    diretorio4.mkdir();
+                }
+                guardaPneus(file);
+                
             }
+            guardaRelacao(db, save, idcorrida, i);
+            guardaDesgaste(db, save, idcorrida, i, 100);
+            escolhePneu(save, i, 1);
         }
         FDSTelaPneus tela = new FDSTelaPneus();
         tela.recebedados(db, equipe, idcorrida, save);

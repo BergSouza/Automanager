@@ -386,12 +386,12 @@ public class Principal extends javax.swing.JFrame {
 
         txtGPinfo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtGPinfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtGPinfo.setText("1/21 - 58 VOLTAS");
+        txtGPinfo.setText("X/X - XX VOLTAS");
         jPanel1.add(txtGPinfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, 130, 30));
 
         txtGP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtGP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtGP.setText("Próxima Corrida: GP Austrália - Melbourne");
+        txtGP.setText("Próxima Corrida: GP Pais - Pista");
         jPanel1.add(txtGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 270, 30));
 
         txtImagemMotor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/motor.png"))); // NOI18N

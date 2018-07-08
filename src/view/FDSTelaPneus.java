@@ -1021,6 +1021,11 @@ public class FDSTelaPneus extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
+        FDSTreino treino = new FDSTreino();
+        treino.setVisible(true);
+        treino.setLocationRelativeTo(null);
+        treino.recebedados(dbb,savee);
+        treino.mousedrag(treino);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed

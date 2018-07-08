@@ -115,7 +115,7 @@ public class Automanager {
     }
     */
     public static String getVersao(){
-        String versao = "Pre-Alpha 0.0.2"; 
+        String versao = "Pre-Alpha 0.0.3"; 
         return versao;
     }
    

@@ -45,6 +45,17 @@ public class Corrida {
             return null;
         }
     }
+    public static int getCorridaAtual(String db, String sav) throws IOException{
+        try {
+            FileReader fr = new FileReader("C:/automanager/"+sav+"/"+db+"/corridas/atual.amdb");
+            BufferedReader br = new BufferedReader(fr);
+            return Integer.parseInt(br.readLine());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Corrida.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+        
+    }
     public static String getPista(String db, String numerocorrida, String sav){
         try {
             return baseP(db, numerocorrida, 2, sav);
