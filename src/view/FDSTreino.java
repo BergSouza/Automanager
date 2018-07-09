@@ -9,6 +9,7 @@ import classes.Corrida;
 import classes.Equipe;
 import classes.FimSemana;
 import classes.FuncoesGerais;
+import classes.IA;
 import classes.Piloto;
 import classes.Pneu;
 import java.awt.Color;
@@ -40,6 +41,7 @@ public class FDSTreino extends javax.swing.JFrame {
     private static int idcorridaa = 0;
     private static String desgastepneup11 = null;
     private static String desgastepneup22 = null;
+    private static int temporestante = 60;
     //private static int numtotalpilotos = 0;
     //private static int pagina = 1;
     //private static String dbb = null;
@@ -65,13 +67,23 @@ public class FDSTreino extends javax.swing.JFrame {
             idequipee = idequipe;
             dbb = db;
             savee = save;
+            idcorridaa = Corrida.getCorridaAtual(db, save);
             setapilotos(db, save);
             setacores();
+            for (int i = 1; i < maxpilotos++; i++) {
+                setatempos(i, 0, 0, 0);
+            }
         } catch (IOException ex) {
             Logger.getLogger(FDSTreino.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
+    public static void setatempos(int idpiloto, int minuto, int segundo, int milesimo) throws IOException{
+        
+            FimSemana.salvatempo(dbb, savee, idpiloto, 0, 0, 0);
+        
+    }
+    
     public void setacores(){
         try {
             String cor = Equipe.getCor1(dbb, idequipee, savee);
@@ -655,11 +667,11 @@ public class FDSTreino extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        txttemporestante = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        txtmelhortempo = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -858,6 +870,11 @@ public class FDSTreino extends javax.swing.JFrame {
         btnAbandonar.setBackground(new java.awt.Color(255, 255, 255));
         btnAbandonar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnAbandonar.setText("Abandonar Treino");
+        btnAbandonar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbandonarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnAbandonar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 210, 40));
 
         btnMandaPista1.setBackground(new java.awt.Color(255, 255, 255));
@@ -875,6 +892,11 @@ public class FDSTreino extends javax.swing.JFrame {
         btnAvancar.setBackground(new java.awt.Color(255, 255, 255));
         btnAvancar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnAvancar.setText("Avançar 5 Minutos");
+        btnAvancar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvancarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnAvancar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 570, 210, 40));
 
         selecaopilotagem1.setBackground(new java.awt.Color(51, 51, 51));
@@ -1013,10 +1035,10 @@ public class FDSTreino extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/novojogo/relogio3.png"))); // NOI18N
         jLabel6.setText(" TEMPO RESTANTE: ");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/novojogo/relogio3.png"))); // NOI18N
-        jLabel7.setText(" 60 MINUTOS");
+        txttemporestante.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txttemporestante.setForeground(new java.awt.Color(255, 255, 255));
+        txttemporestante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/novojogo/relogio3.png"))); // NOI18N
+        txttemporestante.setText(" 60 MINUTOS");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -1029,7 +1051,7 @@ public class FDSTreino extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
-                        .addComponent(jLabel7)))
+                        .addComponent(txttemporestante)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -1040,7 +1062,7 @@ public class FDSTreino extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(txttemporestante))
                 .addContainerGap())
         );
 
@@ -1059,13 +1081,13 @@ public class FDSTreino extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/novojogo/usuario3.png"))); // NOI18N
         jLabel9.setText(" PILOTO");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 44, -1, -1));
+        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, 30));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/novojogo/relogio3.png"))); // NOI18N
-        jLabel10.setText("MELHOR TEMPO");
-        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 44, -1, -1));
+        txtmelhortempo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtmelhortempo.setForeground(new java.awt.Color(255, 255, 255));
+        txtmelhortempo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/novojogo/relogio3.png"))); // NOI18N
+        txtmelhortempo.setText("MELHOR TEMPO");
+        jPanel4.add(txtmelhortempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 44, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -1781,6 +1803,30 @@ public class FDSTreino extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_selecaocompostos2ActionPerformed
 
+    private void btnAvancarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvancarActionPerformed
+        temporestante = temporestante - 5;
+        txttemporestante.setText(temporestante+" MINUTOS");
+        
+        if(temporestante == 0){
+            btnAvancar.setEnabled(false);
+        }
+        
+        try {
+            txttempo1.setText(IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 1));
+            txttempo2.setText(IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 2));
+            txttempo3.setText(IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 3));
+            txttempo4.setText(IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 4));
+            txttempo12.setText(IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 12));
+        } catch (IOException ex) {
+            Logger.getLogger(FDSTreino.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnAvancarActionPerformed
+
+    private void btnAbandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbandonarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnAbandonarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1829,7 +1875,6 @@ public class FDSTreino extends javax.swing.JFrame {
     private javax.swing.JLabel imgbarrap2;
     private javax.swing.JLabel imgpneu1;
     private javax.swing.JLabel imgpneu2;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1839,7 +1884,6 @@ public class FDSTreino extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
@@ -1904,6 +1948,7 @@ public class FDSTreino extends javax.swing.JFrame {
     private javax.swing.JLabel txtep7;
     private javax.swing.JLabel txtep8;
     private javax.swing.JLabel txtep9;
+    private javax.swing.JLabel txtmelhortempo;
     private javax.swing.JLabel txtp1;
     private javax.swing.JLabel txtp10;
     private javax.swing.JLabel txtp11;
@@ -2004,6 +2049,7 @@ public class FDSTreino extends javax.swing.JFrame {
     private javax.swing.JLabel txttempo7;
     private javax.swing.JLabel txttempo8;
     private javax.swing.JLabel txttempo9;
+    private javax.swing.JLabel txttemporestante;
     private javax.swing.JLabel txtultimavolta1;
     // End of variables declaration//GEN-END:variables
 }

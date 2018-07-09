@@ -48,7 +48,7 @@ public class FimSemana {
         bw.close();
     }
     
-    public void guardaRelacao(String db , String save,String idcorrida, int idpiloto) throws IOException{
+    public static void guardaRelacao(String db , String save,String idcorrida, int idpiloto) throws IOException{
         try {
             FileReader fr = new FileReader("C:/automanager/"+save+"/"+db+"/fimdesemana/pneus/"+idpiloto+".db");
             BufferedReader br = new BufferedReader(fr);
@@ -89,7 +89,7 @@ public class FimSemana {
         }
     }
     
-    public void guardaDesgaste(String db , String save,String idcorrida, int idpiloto, int desgaste) throws IOException{
+    public static void guardaDesgaste(String db , String save,String idcorrida, int idpiloto, int desgaste) throws IOException{
         try {
             FileReader fr = new FileReader("C:/automanager/"+save+"/"+db+"/fimdesemana/relacaopneus/"+idpiloto+".db");
             BufferedReader br = new BufferedReader(fr);
@@ -120,7 +120,7 @@ public class FimSemana {
         }
     }
     
-    public void escolhePneu(String save, int idpiloto, int numpneusequencia) throws IOException{
+    public static void escolhePneu(String save, int idpiloto, int numpneusequencia) throws IOException{
         File file = new File("C:/automanager/"+save+"/temp/fimdesemana/escolhapneus");
         if(file.exists()){
             
@@ -272,6 +272,46 @@ public class FimSemana {
         tela.setVisible(true);
         tela.setLocationRelativeTo(null);
     }
+    
+     public static void salvatempo(String db , String save , int idpiloto, int minuto, int segundo, int milesimo) throws IOException{
+        
+            File file = new File("C:/automanager/"+save+"/"+db+"/melhortempotreino/");
+            if(file.exists()){
+                
+            }else{
+                file.mkdir();
+            }
+            FileWriter fw = new FileWriter("C:/automanager/"+save+"/"+db+"/melhortempotreino/"+idpiloto+".db");
+            BufferedWriter bw = new BufferedWriter(fw);
+            FileReader fr = new FileReader("C:/automanager/"+save+"/"+db+"/melhortempotreino/"+idpiloto+".db");
+            BufferedReader br = new BufferedReader(fr);
+            String minutolido = br.readLine();
+            String segundolido = br.readLine();
+            String milesimolido = br.readLine();
+            int ml = Integer.parseInt(minutolido);
+            int sl = Integer.parseInt(segundolido);
+            int mi = Integer.parseInt(milesimolido);
+            if(minuto > ml && segundo > sl && milesimo > mi){
+                bw.write(minutolido);
+                bw.newLine();
+                bw.write(segundolido);
+                bw.newLine();
+                bw.write(milesimolido);
+                bw.newLine();
+                bw.close();
+            }
+            if(ml == 0 && sl == 0 && mi == 0){
+                bw.write(minutolido);
+                bw.newLine();
+                bw.write(segundolido);
+                bw.newLine();
+                bw.write(milesimolido);
+                bw.newLine();
+                bw.close();
+            }
+            
+    }
+    
     public static int pegapneusfimsemana(int idpiloto, int pneu, String save) throws FileNotFoundException, IOException{
         
             FileReader frr = new FileReader("C:/automanager/"+save+"/temp/fimdesemana/pneus/"+idpiloto+".db");

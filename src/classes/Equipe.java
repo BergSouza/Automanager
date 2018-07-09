@@ -49,6 +49,10 @@ public class Equipe {
         String d = baseP(db, idequipe, 1,sav);
         return d;
     }
+    public static int getMotor(String db, int idequipe, String sav) throws IOException{
+        int d = Integer.parseInt(baseP(db, idequipe, 2,sav));
+        return d;
+    }
     public static int getID(String db,String save) throws FileNotFoundException, IOException{
         FileReader fr = new FileReader("C:/automanager/"+save+"/"+db+"/save.ams");
         BufferedReader br = new BufferedReader(fr);

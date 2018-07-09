@@ -72,6 +72,30 @@ public class Corrida {
             return null;
         }
     }
+    public static String getMinuto(String db, String numerocorrida, String sav){
+        try {
+            return baseP(db, numerocorrida, 9,sav);
+        } catch (IOException ex) {
+            Logger.getLogger(Corrida.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    public static String getMilesimo(String db, String numerocorrida, String sav){
+        try {
+            return baseP(db, numerocorrida, 11,sav);
+        } catch (IOException ex) {
+            Logger.getLogger(Corrida.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    public static String getSegundo(String db, String numerocorrida, String sav){
+        try {
+            return baseP(db, numerocorrida, 10,sav);
+        } catch (IOException ex) {
+            Logger.getLogger(Corrida.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
     public static String getCurvasPorc(String db, String numerocorrida, String sav){
         try {
             return baseP(db, numerocorrida, 4,sav);

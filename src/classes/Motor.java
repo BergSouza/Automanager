@@ -33,6 +33,15 @@ public class Motor {
         }
         
     }
+    public static int getConfiabilidade(String db, int idmotor, String sav) throws IOException{
+        return Integer.parseInt(baseM(db, idmotor, 2, sav));
+    }
+    public static int getVelocidade(String db, int idmotor, String sav) throws IOException{
+        return Integer.parseInt(baseM(db, idmotor, 3, sav));
+    }
+    public static int getAceleracao(String db, int idmotor, String sav) throws IOException{
+        return Integer.parseInt(baseM(db, idmotor, 4, sav));
+    }
     public static String getId(String db,int idequipe,  String sav) throws IOException{
         try {
             String lida = Equipe.baseP(db, idequipe, 2, sav);
