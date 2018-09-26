@@ -43,7 +43,7 @@ public class IA {
             }
         }
     }
-    public static String fazvolta(String db, String numerocorrida, String sav, int idpiloto) throws IOException{
+    public static void fazvolta(String db, String numerocorrida, String sav, int idpiloto) throws IOException{
         int minutobase = Integer.parseInt(Corrida.getMinuto(db, numerocorrida, sav));
         int segundobase = Integer.parseInt(Corrida.getSegundo(db, numerocorrida, sav));
         int milesimobase = Integer.parseInt(Corrida.getMilesimo(db, numerocorrida, sav));
@@ -109,9 +109,9 @@ public class IA {
         */
         milesimovoltaa = milesimovolta;
         
-        FimSemana.salvatempo(db, sav, idpiloto, minutovoltaa, segundovoltaa, milesimovoltaa);
+        FimSemana.salvatempo(db, sav, idpiloto, minutovoltaa, segundovoltaa, milesimovoltaa, false);
         
-        return minutovoltaa+":"+segundovoltaa+"."+milesimovoltaa;
+        //return minutovoltaa+":"+segundovoltaa+"."+milesimovoltaa;
     }
     public static int verificamilesimo(int milesimovolta){
         int seg = 0;

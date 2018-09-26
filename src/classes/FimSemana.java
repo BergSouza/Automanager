@@ -273,9 +273,10 @@ public class FimSemana {
         tela.setLocationRelativeTo(null);
     }
     
-     public static void salvatempo(String db , String save , int idpiloto, int minuto, int segundo, int milesimo) throws IOException{
+     public static void salvatempo(String db , String save , int idpiloto, int minuto, int segundo, int milesimo, boolean zerar) throws IOException{
         
             File file = new File("C:/automanager/"+save+"/"+db+"/melhortempotreino/");
+            
             if(file.exists()){
                 
             }else{
@@ -283,33 +284,29 @@ public class FimSemana {
             }
             FileWriter fw = new FileWriter("C:/automanager/"+save+"/"+db+"/melhortempotreino/"+idpiloto+".db");
             BufferedWriter bw = new BufferedWriter(fw);
-            FileReader fr = new FileReader("C:/automanager/"+save+"/"+db+"/melhortempotreino/"+idpiloto+".db");
-            BufferedReader br = new BufferedReader(fr);
-            String minutolido = br.readLine();
-            String segundolido = br.readLine();
-            String milesimolido = br.readLine();
-            int ml = Integer.parseInt(minutolido);
-            int sl = Integer.parseInt(segundolido);
-            int mi = Integer.parseInt(milesimolido);
-            if(minuto > ml && segundo > sl && milesimo > mi){
-                bw.write(minutolido);
+            if(zerar == true){
+                bw.write("0");
                 bw.newLine();
-                bw.write(segundolido);
+                bw.write("0");
                 bw.newLine();
-                bw.write(milesimolido);
+                bw.write("0");
+            }else{
+                bw.write(""+minuto);
                 bw.newLine();
-                bw.close();
+                bw.write(""+segundo);
+                bw.newLine();
+                bw.write(""+milesimo);
             }
-            if(ml == 0 && sl == 0 && mi == 0){
-                bw.write(minutolido);
-                bw.newLine();
-                bw.write(segundolido);
-                bw.newLine();
-                bw.write(milesimolido);
-                bw.newLine();
-                bw.close();
-            }
+            bw.close();
             
+            
+    
+     }
+    public static String retornamelhortempo(String db , String save , int idpiloto) throws IOException{
+        FileReader fr = new FileReader("C:/automanager/"+save+"/"+db+"/melhortempotreino/"+idpiloto+".db");
+        BufferedReader br = new BufferedReader(fr);
+        
+        return br.readLine()+":"+br.readLine()+"."+br.readLine();
     }
     
     public static int pegapneusfimsemana(int idpiloto, int pneu, String save) throws FileNotFoundException, IOException{

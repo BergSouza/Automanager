@@ -42,6 +42,8 @@ public class FDSTreino extends javax.swing.JFrame {
     private static String desgastepneup11 = null;
     private static String desgastepneup22 = null;
     private static int temporestante = 60;
+    private static boolean p1pista = false;
+    private static boolean p2pista = false;
     //private static int numtotalpilotos = 0;
     //private static int pagina = 1;
     //private static String dbb = null;
@@ -70,17 +72,18 @@ public class FDSTreino extends javax.swing.JFrame {
             idcorridaa = Corrida.getCorridaAtual(db, save);
             setapilotos(db, save);
             setacores();
-            for (int i = 1; i < maxpilotos++; i++) {
-                setatempos(i, 0, 0, 0);
+            maxpilotos = FuncoesGerais.totalpilotos(save);
+            for (int i = 1; i < maxpilotos+1; i++) {
+                setatempos(i, 0, 0, 0, true);
             }
         } catch (IOException ex) {
             Logger.getLogger(FDSTreino.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
-    public static void setatempos(int idpiloto, int minuto, int segundo, int milesimo) throws IOException{
+    public static void setatempos(int idpiloto, int minuto, int segundo, int milesimo, boolean zerar) throws IOException{
         
-            FimSemana.salvatempo(dbb, savee, idpiloto, 0, 0, 0);
+            FimSemana.salvatempo(dbb, savee, idpiloto, 0, 0, 0, zerar);
         
     }
     
@@ -881,12 +884,22 @@ public class FDSTreino extends javax.swing.JFrame {
         btnMandaPista1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnMandaPista1.setForeground(new java.awt.Color(51, 51, 51));
         btnMandaPista1.setText("Mandar a Pista");
+        btnMandaPista1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMandaPista1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnMandaPista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 100, 30));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 215, 8));
 
         btnMandaPista2.setBackground(new java.awt.Color(255, 255, 255));
         btnMandaPista2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         btnMandaPista2.setText("Mandar a Pista");
+        btnMandaPista2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMandaPista2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnMandaPista2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 100, 30));
 
         btnAvancar.setBackground(new java.awt.Color(255, 255, 255));
@@ -1812,11 +1825,246 @@ public class FDSTreino extends javax.swing.JFrame {
         }
         
         try {
-            txttempo1.setText(IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 1));
-            txttempo2.setText(IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 2));
-            txttempo3.setText(IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 3));
-            txttempo4.setText(IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 4));
-            txttempo12.setText(IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 12));
+            if(idp11 == 1){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 1);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 1);
+            }
+            if(idp11 == 2){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 2);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 2);
+            }
+            if(idp11 == 3){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 3);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 3);
+            }
+            if(idp11 == 4){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 4);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 4);
+            }
+            if(idp11 == 5){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 5);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 5);
+            }
+            if(idp11 == 6){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 6);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 6);
+            }
+            if(idp11 == 7){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 7);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 7);
+            }
+            if(idp11 == 8){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 8);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 8);
+            }
+            if(idp11 == 9){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 9);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 9);
+            }
+            if(idp11 == 10){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 10);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 10);
+            }
+            if(idp11 == 11){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 11);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 11);
+            }
+            if(idp11 == 12){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 12);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 12);
+            }
+            if(idp11 == 13){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 13);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 13);
+            }
+            if(idp11 == 14){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 14);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 14);
+            }
+            if(idp11 == 15){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 15);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 15);
+            }
+            if(idp11 == 16){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 16);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 16);
+            }
+            if(idp11 == 17){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 17);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 17);
+            }
+            if(idp11 == 18){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 18);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 18);
+            }
+            if(idp11 == 19){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 19);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 19);
+            }
+            if(idp11 == 20){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 20);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 20);
+            }
+            if(idp11 == 21){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 21);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 21);
+            }
+            if(idp11 == 22){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 22);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 22);
+            }
+            if(idp11 == 23){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 23);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 23);
+            }
+            if(idp11 == 24){
+                if(p1pista == true){
+                    IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 24);
+                }else{
+                    
+                }
+            }else{
+                IA.fazvolta(dbb, Integer.toString(idcorridaa), savee, 24);
+            }
+            txttempo1.setText(FimSemana.retornamelhortempo(dbb, savee, 1));
+            txttempo2.setText(FimSemana.retornamelhortempo(dbb, savee, 2));
+            txttempo3.setText(FimSemana.retornamelhortempo(dbb, savee, 3));
+            txttempo4.setText(FimSemana.retornamelhortempo(dbb, savee, 4));
+            txttempo5.setText(FimSemana.retornamelhortempo(dbb, savee, 5));
+            txttempo6.setText(FimSemana.retornamelhortempo(dbb, savee, 6));
+            txttempo7.setText(FimSemana.retornamelhortempo(dbb, savee, 7));
+            txttempo8.setText(FimSemana.retornamelhortempo(dbb, savee, 8));
+            txttempo9.setText(FimSemana.retornamelhortempo(dbb, savee, 9));
+            txttempo10.setText(FimSemana.retornamelhortempo(dbb, savee,10));
+            txttempo11.setText(FimSemana.retornamelhortempo(dbb, savee, 11));
+            txttempo12.setText(FimSemana.retornamelhortempo(dbb, savee, 12));
+            txttempo13.setText(FimSemana.retornamelhortempo(dbb, savee, 13));
+            txttempo14.setText(FimSemana.retornamelhortempo(dbb, savee, 14));
+            txttempo15.setText(FimSemana.retornamelhortempo(dbb, savee, 15));
+            txttempo16.setText(FimSemana.retornamelhortempo(dbb, savee, 16));
+            txttempo17.setText(FimSemana.retornamelhortempo(dbb, savee, 17));
+            txttempo18.setText(FimSemana.retornamelhortempo(dbb, savee, 18));
+            txttempo19.setText(FimSemana.retornamelhortempo(dbb, savee, 19));
+            txttempo20.setText(FimSemana.retornamelhortempo(dbb, savee, 20));
+            txttempo21.setText(FimSemana.retornamelhortempo(dbb, savee, 21));
+            txttempo22.setText(FimSemana.retornamelhortempo(dbb, savee, 22));
+            txttempo23.setText(FimSemana.retornamelhortempo(dbb, savee, 23));
+            txttempo24.setText(FimSemana.retornamelhortempo(dbb, savee, 24));
         } catch (IOException ex) {
             Logger.getLogger(FDSTreino.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1826,6 +2074,30 @@ public class FDSTreino extends javax.swing.JFrame {
     private void btnAbandonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbandonarActionPerformed
         dispose();
     }//GEN-LAST:event_btnAbandonarActionPerformed
+
+    private void btnMandaPista2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMandaPista2ActionPerformed
+        if(p2pista == false){
+            p2pista = true;
+            btnMandaPista2.setEnabled(false);
+            btnMandaPista2.setText("Cancelar");
+        }
+        if(p2pista == true){
+            p2pista = false;
+            btnMandaPista2.setText("Mandar à Pista");
+        }
+    }//GEN-LAST:event_btnMandaPista2ActionPerformed
+
+    private void btnMandaPista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMandaPista1ActionPerformed
+        if(p1pista == false){
+            p1pista = true;
+            btnMandaPista1.setEnabled(false);
+            btnMandaPista1.setText("Cancelar");
+        }
+        if(p1pista == true){
+            p1pista = false;
+            btnMandaPista1.setText("Mandar à Pista");
+        }
+    }//GEN-LAST:event_btnMandaPista1ActionPerformed
 
     /**
      * @param args the command line arguments

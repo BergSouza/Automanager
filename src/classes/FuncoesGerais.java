@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import view.Mensagem;
 import view.Principal;
 
 /**
@@ -35,6 +36,9 @@ public class FuncoesGerais {
         
     }
     public void carregajogo(String save) throws IOException{
+        Mensagem msgcarregando = new Mensagem();
+        msgcarregando.mensagem("Carregando Jogo", "#000000");
+        
         String arquivo = ("C:/automanager/saves/"+save+"/save.ams");
         File file = new File(arquivo);
         if(file.exists()){
@@ -48,6 +52,7 @@ public class FuncoesGerais {
             p.setLocationRelativeTo(null);
             p.mousedrag(p);
         }
+        msgcarregando.dispose();
     }
     public static int totalpilotos(String save) throws FileNotFoundException, IOException{
         FileReader fr = new FileReader("C:/automanager/"+save+"/temp/dbinfo.amdi");
